@@ -3,7 +3,7 @@
  * Unofficial Chrome Extension
  * @author       Kevin Coughlin <kevintcoughlin@gmail.com>
  * @copyright    2014 Kevin Coughlin
- * @license      MIT License
+ * @license      {@link https://github.com/KevinTCoughlin/sir-chrome-extension/blob/master/LICENSE.md|MIT License}
  */
 (function() {
     'use strict';
