@@ -1,6 +1,6 @@
 {
   "name": "sir-smodcast-internet-radio",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "engines": {
     "node": "*"
   },
