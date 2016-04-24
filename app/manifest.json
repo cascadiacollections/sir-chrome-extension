@@ -5,7 +5,7 @@
     "manifest_version": 2,
     "description": "__MSG_appDescription__",
     "author": "Kevin Coughlin",
-    "homepage_url": "http://kevintcoughlin.com/",
+    "homepage_url": "https://kevintcoughlin.com/",
     "icons": {
         "16": "images/icon-16.png",
         "19": "images/icon-19.png",
