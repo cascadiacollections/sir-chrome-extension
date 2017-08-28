@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-const expect = require('chai').expect;
-const chrome = require('sinon-chrome');
+const expect = require('chai').expect
+const chrome = require('sinon-chrome')
 
-describe('sinon-chrome', function() {
+describe('sinon-chrome', function () {
   it('has property runtime', function () {
-    expect(chrome).to.have.property('runtime');
-  });
-});
+    expect(chrome).to.have.property('runtime')
+  })
+})

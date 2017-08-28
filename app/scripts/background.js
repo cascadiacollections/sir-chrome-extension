@@ -5,43 +5,43 @@
  * @copyright    2014-2016 Kevin Coughlin
  * @license      {@link https://github.com/KevinTCoughlin/sir-chrome-extension/blob/master/LICENSE.md|MIT License}
  */
-(function() {
-    'use strict';
+(function () {
+  'use strict'
 
     /**
      * @namespace SIR
      */
-    var SIR = SIR || {
-        streamURL: "http://64.150.176.42:8242/;stream.mp3",
-        badge: {
-            text: 'OFF'
-        },
-        toggleStream: () => {
-          if (!SIR.player) {
-              SIR.init();
-          }
+  var SIR = SIR || {
+    streamURL: 'http://64.150.176.42:8242/;stream.mp3',
+    badge: {
+      text: 'OFF'
+    },
+    toggleStream: () => {
+      if (!SIR.player) {
+        SIR.init()
+      }
 
-          if (SIR.player.paused) {
-              SIR.player.src = SIR.streamURL
-              SIR.player.play();
-              SIR.badge.text = "ON"
-          } else {
-              SIR.player.src = ''
-              SIR.player.pause();
-              SIR.badge.text = "OFF";
-          }
-        },
-        init: () => {
-          SIR.player = new Audio();
-          SIR.player.autoplay = true;
-          SIR.player.src = SIR.streamURL
-        },
-        handleBrowserAction: () => {
-          SIR.toggleStream();
-          chrome.browserAction.setBadgeText(SIR.badge);
-        }
-    };
+      if (SIR.player.paused) {
+        SIR.player.src = SIR.streamURL
+        SIR.player.play()
+        SIR.badge.text = 'ON'
+      } else {
+        SIR.player.src = ''
+        SIR.player.pause()
+        SIR.badge.text = 'OFF'
+      }
+    },
+    init: () => {
+      SIR.player = new Audio()
+      SIR.player.autoplay = true
+      SIR.player.src = SIR.streamURL
+    },
+    handleBrowserAction: () => {
+      SIR.toggleStream()
+      chrome.browserAction.setBadgeText(SIR.badge)
+    }
+  }
 
-    chrome.browserAction.setBadgeText(SIR.badge);
-    chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction);
-})();
+  chrome.browserAction.setBadgeText(SIR.badge)
+  chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction)
+})()

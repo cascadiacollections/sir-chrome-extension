@@ -12,5 +12,8 @@
     "mocha": "^2.4.5",
     "sinon-chrome": "^1.1.2",
     "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [ "describe", "it", "Audio", "chrome" ]
   }
 }
