@@ -11,7 +11,7 @@
     /**
      * @namespace SIR
      */
-  var SIR = SIR || {
+  var SIR = {
     streamURL: 'http://64.150.176.42:8242/;stream.mp3',
     badge: {
       text: 'OFF'
