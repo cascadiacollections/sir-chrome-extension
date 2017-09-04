@@ -1,3 +1,5 @@
+/* global chrome */
+
 /**
  * S.I.R - Kevin Smith's SModcast Internet Radio
  * Unofficial Chrome Extension
