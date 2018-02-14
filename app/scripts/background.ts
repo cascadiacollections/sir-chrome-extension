@@ -8,29 +8,28 @@ class SIR {
    * Constructor.
    */
   constructor() {
-    SIR.PLAYER_INSTANCE.autoplay = true
     SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
-    chrome.browserAction.setBadgeText(this.getBadge())
-    chrome.browserAction.onClicked.addListener(this.handleBrowserAction)
+    chrome.browserAction.setBadgeText(SIR.getBadge())
+    chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction)
   }
 
   /**
    * Toggle audio instance play / pause.
    */
-  public toggle(): void {
+  public static toggle(): void {
     if (SIR.PLAYER_INSTANCE.paused) {
-      this.play();
+      SIR.play();
     } else {
-      this.stop();
+      SIR.stop();
     }
   }
 
   /**
    * Handle click on extension badge.
    */
-  private handleBrowserAction(): void {
-    this.toggle();
-    chrome.browserAction.setBadgeText(this.getBadge());
+  private static handleBrowserAction(): void {
+    SIR.toggle();
+    chrome.browserAction.setBadgeText(SIR.getBadge());
   }
 
   /**
@@ -43,7 +42,7 @@ class SIR {
   /**
    * @returns the badge object to render.
    */
-  private getBadge(): chrome.browserAction.BadgeTextDetails {
+  private static getBadge(): chrome.browserAction.BadgeTextDetails {
     let badge = { text: SIR.getBadgeText() };
     return badge;
   }
@@ -51,15 +50,17 @@ class SIR {
   /**
    * Stop audio playback.
    */
-  private stop(): void {
+  private static stop(): void {
     SIR.PLAYER_INSTANCE.pause();
   }
 
   /**
    * Start audio playback.
    */
-  private play(): void {
+  private static play(): void {
     SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
     SIR.PLAYER_INSTANCE.play();
   }
 }
+
+export default new SIR();

@@ -5,6 +5,7 @@
     "node": "6.11.2"
   },
   "scripts": {
+    "build": "webpack ./webpack.config.js",
     "test": "standard && mocha"
   },
   "devDependencies": {
@@ -17,7 +18,10 @@
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "^3.5.0",
     "sinon-chrome": "^2.2.1",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "ts-loader": "^3.5.0",
+    "typescript": "^2.7.1",
+    "webpack": "^3.11.0"
   },
   "license": "MIT",
   "standard": {
