@@ -8,7 +8,7 @@ class SIR {
    * Constructor.
    */
   constructor() {
-    SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
+
     chrome.browserAction.setBadgeText(SIR.getBadge())
     chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction)
   }
@@ -48,17 +48,25 @@ class SIR {
   }
 
   /**
+   * Sets the audio source to S.I.R's stream URL.
+   */
+  private static setSrc(): void {
+    SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
+  }
+
+  /**
    * Stop audio playback.
    */
   private static stop(): void {
     SIR.PLAYER_INSTANCE.pause();
+    SIR.PLAYER_INSTANCE.src = '';
   }
 
   /**
    * Start audio playback.
    */
   private static play(): void {
-    SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
+    SIR.setSrc();
     SIR.PLAYER_INSTANCE.play();
   }
 }
