@@ -8,7 +8,6 @@ class SIR {
    * Constructor.
    */
   constructor() {
-
     chrome.browserAction.setBadgeText(SIR.getBadge())
     chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction)
   }
