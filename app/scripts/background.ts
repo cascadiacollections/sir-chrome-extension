@@ -1,8 +1,8 @@
 class SIR {
-  private static readonly STREAM_URL = 'http://64.150.176.42:8242/;stream.mp3';
-  private static readonly PLAYER_INSTANCE = new Audio();
-  private static readonly LABEL_OFF = 'OFF';
-  private static readonly LABEL_ON = 'ON';
+  private static readonly STREAM_URL: string = 'http://64.150.176.42:8242/;stream.mp3';
+  private static readonly PLAYER_INSTANCE: HTMLAudioElement = new Audio();
+  private static readonly LABEL_OFF: string = 'OFF';
+  private static readonly LABEL_ON: string = 'ON';
 
   /**
    * Constructor.
@@ -42,15 +42,14 @@ class SIR {
    * @returns the badge object to render.
    */
   private static getBadge(): chrome.browserAction.BadgeTextDetails {
-    let badge = { text: SIR.getBadgeText() };
-    return badge;
+    return { text: SIR.getBadgeText() };
   }
 
   /**
    * Sets the audio source to S.I.R's stream URL.
    */
-  private static setSrc(): void {
-    SIR.PLAYER_INSTANCE.src = SIR.STREAM_URL;
+  private static setSrc(streamUrl: string): void {
+    SIR.PLAYER_INSTANCE.src = streamUrl;
   }
 
   /**
@@ -58,14 +57,14 @@ class SIR {
    */
   private static stop(): void {
     SIR.PLAYER_INSTANCE.pause();
-    SIR.PLAYER_INSTANCE.src = '';
+    SIR.PLAYER_INSTANCE.src = null;
   }
 
   /**
    * Start audio playback.
    */
   private static play(): void {
-    SIR.setSrc();
+    SIR.setSrc(SIR.STREAM_URL);
     SIR.PLAYER_INSTANCE.play();
   }
 }
