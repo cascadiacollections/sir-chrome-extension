@@ -6,7 +6,8 @@
   },
   "scripts": {
     "build": "webpack ./webpack.config.js",
-    "test": "standard && mocha"
+    "test": "standard && mocha",
+    "lint": "node ./node_modules/tslint/bin/tslint --project tsconfig.json"
   },
   "devDependencies": {
     "@types/chrome": "0.0.59",
@@ -20,6 +21,8 @@
     "sinon-chrome": "^2.2.1",
     "standard": "^10.0.3",
     "ts-loader": "^3.5.0",
+    "tslint": "^5.12.0",
+    "tslint-microsoft-contrib": "^6.0.0",
     "typescript": "^2.7.1",
     "webpack": "^3.11.0"
   },
