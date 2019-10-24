@@ -35,7 +35,7 @@ class SIR {
    * @returns the badge label text depending on audio player state.
    */
   private static getBadgeText(): string {
-    return SIR.PLAYER_INSTANCE.paused ? SIR.LABEL_OFF : SIR.LABEL_ON;  
+    return SIR.PLAYER_INSTANCE.paused ? SIR.LABEL_OFF : SIR.LABEL_ON;
   }
 
   /**

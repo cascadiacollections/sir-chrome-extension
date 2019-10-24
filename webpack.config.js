@@ -1,15 +1,21 @@
+// @ts-check
+const path = require('path');
+
 module.exports = {
+  mode: process.env.NODE_ENV || "development",
   devtool: 'inline-source-map',
   entry: './app/scripts/background.ts',
   output: {
-    filename: './app/dist/background.js'
+    path: path.join(__dirname, "app", "dist"),
+    filename: 'background.js'
   },
   resolve: {
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: [".ts", ".tsx", ".js"]
   },
   module: {
-    loaders: [
-      { test: /\.tsx?$/, loader: 'ts-loader' }
+    rules: [
+      { test: /\.tsx?$/, loader: "ts-loader" }
     ]
-  }
+  },
+  plugins: []
 }

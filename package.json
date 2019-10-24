@@ -1,8 +1,8 @@
 {
   "name": "sir-smodcast-internet-radio",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "engines": {
-    "node": "6.11.2"
+    "node": "^10.16.3"
   },
   "scripts": {
     "build": "webpack ./webpack.config.js",
@@ -10,21 +10,22 @@
     "lint": "node ./node_modules/tslint/bin/tslint --project tsconfig.json"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.59",
-    "chai": "^4.1.2",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "mocha": "^5.2.0",
-    "sinon-chrome": "^2.2.1",
-    "standard": "^10.0.3",
-    "ts-loader": "^3.5.0",
-    "tslint": "^5.12.0",
-    "tslint-microsoft-contrib": "^6.0.0",
-    "typescript": "^2.7.1",
-    "webpack": "^3.11.0"
+    "@types/chrome": "0.0.91",
+    "chai": "^4.2.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.2.2",
+    "sinon-chrome": "^3.0.1",
+    "standard": "^14.3.1",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   },
   "license": "MIT",
   "standard": {

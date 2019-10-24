@@ -1,5 +1,4 @@
-# https://docs.travis-ci.com/user/customizing-the-build
 language: node_js
 sudo: false
 node_js:
-  - '6.11.2'
+  - '10.16.3'

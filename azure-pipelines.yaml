@@ -1,0 +1,31 @@
+pool:
+  name: Azure Pipelines
+  demands: npm
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm test'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: test
+
+- task: Npm@1
+  displayName: 'npm build'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive app'
+  inputs:
+    rootFolderOrFile: app
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
