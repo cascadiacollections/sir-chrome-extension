@@ -1,75 +1,75 @@
+const SMODCAST_RADIO_URL: string = 'https://64.150.176.42:8242/;stream.mp3';
+const LABEL_OFF: string = 'OFF';
+const LABEL_ON: string = 'ON';
+
 /**
  * S.I.R - SModcast Internet Radio audio player
  */
-// tslint:disable-next-line:no-unnecessary-class
-class SIR {
-  private static readonly STREAM_URL: string = 'https://64.150.176.42:8242/;stream.mp3';
-  private static readonly PLAYER_INSTANCE: HTMLAudioElement = new Audio();
-  private static readonly LABEL_OFF: string = 'OFF';
-  private static readonly LABEL_ON: string = 'ON';
+class MediaPlayer {
+  private readonly audioElement: HTMLAudioElement = new Audio();
+  private readonly url: string;
+
+  constructor(url: string) {
+    this.url = url;
+
+    chrome.browserAction.setBadgeText(this.badge);
+    chrome.browserAction.onClicked.addListener(this.handleBrowserAction);
+  }
 
   /**
-   * Constructor.
+   * @returns the badge label text depending on audio player state.
    */
-  constructor() {
-    chrome.browserAction.setBadgeText(SIR.getBadge());
-    chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction);
+  private get badgeText(): string {
+    return this.audioElement.paused ? LABEL_OFF : LABEL_ON;
+  }
+
+  /**
+   * @returns the badge object to render.
+   */
+  private get badge(): chrome.browserAction.BadgeTextDetails {
+    return { text: this.badgeText };
+  }
+
+  /**
+   * Sets the audio source to S.I.R's stream URL.
+   */
+  private set audioSource(streamUrl: string) {
+    this.audioElement.src = streamUrl;
   }
 
   /**
    * Toggle audio instance play / pause.
    */
-  public static TOGGLE(): void {
-    if (SIR.PLAYER_INSTANCE.paused) {
-      SIR.play();
+  public toggle(): void {
+    if (this.audioElement.paused) {
+      this.play();
     } else {
-      SIR.stop();
+      this.stop();
     }
   }
 
   /**
    * Handle click on extension badge.
    */
-  private static handleBrowserAction(): void {
-    SIR.TOGGLE();
-    chrome.browserAction.setBadgeText(SIR.getBadge());
-  }
-
-  /**
-   * @returns the badge label text depending on audio player state.
-   */
-  private static getBadgeText(): string {
-    return SIR.PLAYER_INSTANCE.paused ? SIR.LABEL_OFF : SIR.LABEL_ON;
-  }
-
-  /**
-   * @returns the badge object to render.
-   */
-  private static getBadge(): chrome.browserAction.BadgeTextDetails {
-    return { text: SIR.getBadgeText() };
-  }
-
-  /**
-   * Sets the audio source to S.I.R's stream URL.
-   */
-  private static setSrc(streamUrl: string): void {
-    SIR.PLAYER_INSTANCE.src = streamUrl;
+  private handleBrowserAction(): void {
+    this.toggle();
+    chrome.browserAction.setBadgeText(this.badge);
   }
 
   /**
    * Stop audio playback.
    */
-  private static stop(): void {
-    SIR.PLAYER_INSTANCE.pause();
-    delete SIR.PLAYER_INSTANCE.src;
+  private stop(): void {
+    this.audioElement.pause();
+    delete this.audioElement.src;
   }
 
   /**
    * Start audio playback.
    */
-  private static play(): void {
-    SIR.setSrc(SIR.STREAM_URL);
-    SIR.PLAYER_INSTANCE.play()
+  private play(): void {
+    this.audioSource = this.url;
+    this.audioElement.play()
        // tslint:disable-next-line:no-console
        .then((): void => { console.log(`Resume playback`); })
        // tslint:disable-next-line:no-console
@@ -78,4 +78,4 @@ class SIR {
 }
 
 // tslint:disable-next-line:no-default-export export-name
-export default new SIR();
+export default new MediaPlayer(SMODCAST_RADIO_URL);
