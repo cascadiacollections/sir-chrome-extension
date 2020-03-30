@@ -1,5 +1,9 @@
+/**
+ * S.I.R - SModcast Internet Radio audio player
+ */
+// tslint:disable-next-line:no-unnecessary-class
 class SIR {
-  private static readonly STREAM_URL: string = 'http://64.150.176.42:8242/;stream.mp3';
+  private static readonly STREAM_URL: string = 'https://64.150.176.42:8242/;stream.mp3';
   private static readonly PLAYER_INSTANCE: HTMLAudioElement = new Audio();
   private static readonly LABEL_OFF: string = 'OFF';
   private static readonly LABEL_ON: string = 'ON';
@@ -8,14 +12,14 @@ class SIR {
    * Constructor.
    */
   constructor() {
-    chrome.browserAction.setBadgeText(SIR.getBadge())
-    chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction)
+    chrome.browserAction.setBadgeText(SIR.getBadge());
+    chrome.browserAction.onClicked.addListener(SIR.handleBrowserAction);
   }
 
   /**
    * Toggle audio instance play / pause.
    */
-  public static toggle(): void {
+  public static TOGGLE(): void {
     if (SIR.PLAYER_INSTANCE.paused) {
       SIR.play();
     } else {
@@ -27,7 +31,7 @@ class SIR {
    * Handle click on extension badge.
    */
   private static handleBrowserAction(): void {
-    SIR.toggle();
+    SIR.TOGGLE();
     chrome.browserAction.setBadgeText(SIR.getBadge());
   }
 
@@ -57,7 +61,7 @@ class SIR {
    */
   private static stop(): void {
     SIR.PLAYER_INSTANCE.pause();
-    SIR.PLAYER_INSTANCE.src = null;
+    delete SIR.PLAYER_INSTANCE.src;
   }
 
   /**
@@ -65,8 +69,13 @@ class SIR {
    */
   private static play(): void {
     SIR.setSrc(SIR.STREAM_URL);
-    SIR.PLAYER_INSTANCE.play();
+    SIR.PLAYER_INSTANCE.play()
+       // tslint:disable-next-line:no-console
+       .then((): void => { console.log(`Resume playback`); })
+       // tslint:disable-next-line:no-console
+       .catch((error: Error): void => { console.error(error); });
   }
 }
 
+// tslint:disable-next-line:no-default-export export-name
 export default new SIR();
