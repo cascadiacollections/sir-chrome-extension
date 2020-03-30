@@ -6,7 +6,7 @@
   },
   "scripts": {
     "build": "webpack ./webpack.config.js",
-    "test": "standard && mocha",
+    "test": "npm run lint && mocha",
     "lint": "node ./node_modules/tslint/bin/tslint --project tsconfig.json"
   },
   "devDependencies": {
