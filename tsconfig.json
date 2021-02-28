@@ -1,13 +1,6 @@
-{   
-    "compileOnSave": true,
-    "compilerOptions":{
-        "target": "es5",
-        "removeComments": true,
-        "inlineSourceMap": true,
-        "lib":[
-            "es6",
-            "dom"
-        ]
+{
+    "compilerOptions": {
+        "target": "esnext"
     },
     "exclude":[
         "node_modules"
