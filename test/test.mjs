@@ -2,8 +2,8 @@
 
 'use strict'
 
-const expect = require('chai').expect
-const chrome = require('sinon-chrome')
+import { expect } from 'chai';
+import chrome from 'sinon-chrome';
 
 describe('sinon-chrome', function () {
   it('has property runtime', function () {
