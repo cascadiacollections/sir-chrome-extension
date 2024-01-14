@@ -1,0 +1,10 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.168.0/containers/javascript-node
+{
+	"name": "Node",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"postCreateCommand": "yarn",
+	"remoteUser": "node"
+}
