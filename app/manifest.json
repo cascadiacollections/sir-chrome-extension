@@ -2,7 +2,7 @@
     "name": "__MSG_appName__",
     "short_name": "S.I.R",
     "version": "1.4.1",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "description": "__MSG_appDescription__",
     "author": "Kevin Coughlin",
     "homepage_url": "https://kevintcoughlin.com/",
@@ -14,10 +14,9 @@
     },
     "default_locale": "en",
     "background": {
-        "scripts": ["dist/background.js"],
-        "persistent": true
+        "service_worker": "js/background.js"
     },
-    "browser_action": {
+    "action": {
         "default_icon": {
             "16": "images/icon-16.png",
             "19": "images/icon-19.png",
@@ -25,5 +24,12 @@
             "128": "images/icon-128.png"
         },
         "default_title": "S.I.R"
-    }
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["js/options.js", "js/main.js", "js/injected.js"],
+            "matches": [],
+            "extension_ids": []
+        }
+    ]
 }
