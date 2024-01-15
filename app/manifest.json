@@ -14,7 +14,7 @@
     },
     "default_locale": "en",
     "background": {
-        "service_worker": "js/background.js"
+        "service_worker": "dist/background.js"
     },
     "action": {
         "default_icon": {
@@ -27,7 +27,7 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["js/options.js", "js/main.js", "js/injected.js"],
+            "resources": [],
             "matches": [],
             "extension_ids": []
         }
