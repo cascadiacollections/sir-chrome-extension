@@ -383,15 +383,15 @@ caniuse-lite@^1.0.30001646:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001655.tgz#0ce881f5a19a2dcfda2ecd927df4d5c1684b982f"
   integrity sha512-jRGVy3iSGO5Uutn2owlb5gR6qsGngTw9ZTb4ali9f3glshcNmJ2noam4Mo9zia5P9Dk3jNNydy7vQjuE5dQmfg==
 
-chai@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/chai/-/chai-5.0.0.tgz#da1ae496fdac30e97062cbd59e6e2f7bb4c78cc0"
-  integrity sha512-HO5p0oEKd5M6HEcwOkNAThAE3j960vIZvVcc0t2tI06Dd0ATu69cEnMB2wOhC5/ZyQ6m67w3ePjU/HzXsSsdBA==
+chai@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-5.1.1.tgz#f035d9792a22b481ead1c65908d14bb62ec1c82c"
+  integrity sha512-pT1ZgP8rPNqUgieVaEY+ryQr6Q4HXNg8Ei9UnLUrjN4IA7dvQC5JB+/kxVcPNDHyBcc/26CXPkbNzq3qwrOEKA==
   dependencies:
     assertion-error "^2.0.1"
-    check-error "^2.0.0"
+    check-error "^2.1.1"
     deep-eql "^5.0.1"
-    loupe "^3.0.0"
+    loupe "^3.1.0"
     pathval "^2.0.0"
 
 chalk@^4.1.0:
@@ -402,10 +402,10 @@ chalk@^4.1.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-check-error@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/check-error/-/check-error-2.0.0.tgz#589a4f201b6256fd93a2d165089fe43d2676d8c6"
-  integrity sha512-tjLAOBHKVxtPoHe/SA7kNOMvhCRdCJ3vETdeY0RuAc9popf+hyaSV6ZEg9hr4cpWF7jmo/JSWEnLDrnijS9Tog==
+check-error@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/check-error/-/check-error-2.1.1.tgz#87eb876ae71ee388fa0471fe423f494be1d96ccc"
+  integrity sha512-OAlb+T7V4Op9OwdkjmguYRqncdlx5JiofwOAUkmTF+jNdHwzTaTs4sRAGpzLF3oOz5xAyDGrPgeIDFQmDOTiJw==
 
 chokidar@^3.5.3:
   version "3.6.0"
@@ -873,10 +873,10 @@ lolex@^5.0.1:
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-loupe@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/loupe/-/loupe-3.1.0.tgz#46ef1a4ffee73145f5c0a627536d754787c1ea2a"
-  integrity sha512-qKl+FrLXUhFuHUoDJG7f8P8gEMHq9NFS0c6ghXG1J0rldmZFQZoNVv/vyirE9qwCIhWZDsvEFd1sbFu3GvRQFg==
+loupe@^3.1.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/loupe/-/loupe-3.1.1.tgz#71d038d59007d890e3247c5db97c1ec5a92edc54"
+  integrity sha512-edNu/8D5MKVfGVFRhFf8aAxiTM6Wumfz5XsaatSxlD3w4R1d/WEKUTydCdPGbl9K7QG/Ca3GnDV2sIKIpXRQcw==
   dependencies:
     get-func-name "^2.0.1"
 
