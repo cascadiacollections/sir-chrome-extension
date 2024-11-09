@@ -9,7 +9,7 @@
     "@types/chrome": "0.0.279",
     "chai": "5.1.2",
     "minimist": "1.2.8",
-    "mocha": "10.7.3",
+    "mocha": "10.8.2",
     "serialize-javascript": "6.0.2",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.1",
