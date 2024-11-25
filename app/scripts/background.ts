@@ -1,38 +1,37 @@
 const RADIO_URL = 'https://64.150.176.42:8242/;stream.mp3';
 
 class MediaPlayer {
-  private audio = new Audio();
+  #audio = new Audio(); // Private class field for encapsulation
 
   constructor(private url: string) {
-    chrome.browserAction.setBadgeText({ text: this.getBadgeText() });
-    chrome.browserAction.onClicked.addListener(() => this.toggle());
+    this.#updateBadge();
+    chrome.browserAction.onClicked.addListener(() => this.#toggle());
   }
 
-  private getBadgeText(): string {
-    return this.audio.paused ? 'OFF' : 'ON';
-  }
+  #getBadgeText = () => (this.#audio.paused ? 'OFF' : 'ON'); // Arrow function for concise logic
 
-  private updateBadge(): void {
-    chrome.browserAction.setBadgeText({ text: this.getBadgeText() });
-  }
+  #updateBadge = () =>
+    chrome.browserAction.setBadgeText({ text: this.#getBadgeText() }); // Inline badge update
 
-  toggle(): void {
-    this.audio.paused ? this.play() : this.stop();
-    this.updateBadge();
-  }
+  #toggle = () => {
+    this.#audio.paused ? this.#play() : this.#stop();
+    this.#updateBadge();
+  };
 
-  private stop(): void {
-    this.audio.pause();
-    this.audio.src = '';
-  }
+  #stop = () => {
+    this.#audio.pause();
+    this.#audio.src = '';
+  };
 
-  private play(): void {
-    this.audio.src = this.url;
-    this.audio
-      .play()
-      .then(() => console.log('Playback started'))
-      .catch(console.error);
-  }
+  #play = async () => {
+    this.#audio.src = this.url;
+    try {
+      await this.#audio.play();
+      console.log('Playback started'); // Improved logging
+    } catch (error) {
+      console.error('Playback failed:', error); // Improved error handling
+    }
+  };
 }
 
 export default new MediaPlayer(RADIO_URL);
