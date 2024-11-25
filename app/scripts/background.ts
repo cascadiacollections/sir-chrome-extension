@@ -1,81 +1,38 @@
-const SMODCAST_RADIO_URL: string = 'https://64.150.176.42:8242/;stream.mp3';
-const LABEL_OFF: string = 'OFF';
-const LABEL_ON: string = 'ON';
+const RADIO_URL = 'https://64.150.176.42:8242/;stream.mp3';
 
-/**
- * S.I.R - SModcast Internet Radio audio player
- */
 class MediaPlayer {
-  private readonly audioElement: HTMLAudioElement = new Audio();
-  private readonly url: string;
+  private audio = new Audio();
 
-  constructor(url: string) {
-    this.url = url;
-
-    chrome.browserAction.setBadgeText(this.badge);
-    chrome.browserAction.onClicked.addListener(this.handleBrowserAction);
+  constructor(private url: string) {
+    chrome.browserAction.setBadgeText({ text: this.getBadgeText() });
+    chrome.browserAction.onClicked.addListener(() => this.toggle());
   }
 
-  /**
-   * @returns the badge label text depending on audio player state.
-   */
-  private get badgeText(): string {
-    return this.audioElement.paused ? LABEL_OFF : LABEL_ON;
+  private getBadgeText(): string {
+    return this.audio.paused ? 'OFF' : 'ON';
   }
 
-  /**
-   * @returns the badge object to render.
-   */
-  private get badge(): chrome.browserAction.BadgeTextDetails {
-    return { text: this.badgeText };
+  private updateBadge(): void {
+    chrome.browserAction.setBadgeText({ text: this.getBadgeText() });
   }
 
-  /**
-   * Sets the audio source to S.I.R's stream URL.
-   */
-  private set audioSource(streamUrl: string) {
-    this.audioElement.src = streamUrl;
+  toggle(): void {
+    this.audio.paused ? this.play() : this.stop();
+    this.updateBadge();
   }
 
-  /**
-   * Toggle audio instance play / pause.
-   */
-  public toggle(): void {
-    if (this.audioElement.paused) {
-      this.play();
-    } else {
-      this.stop();
-    }
-  }
-
-  /**
-   * Handle click on extension badge.
-   */
-  private handleBrowserAction(): void {
-    this.toggle();
-    chrome.browserAction.setBadgeText(this.badge);
-  }
-
-  /**
-   * Stop audio playback.
-   */
   private stop(): void {
-    this.audioElement.pause();
-    delete this.audioElement.src;
+    this.audio.pause();
+    this.audio.src = '';
   }
 
-  /**
-   * Start audio playback.
-   */
   private play(): void {
-    this.audioSource = this.url;
-    this.audioElement.play()
-       // tslint:disable-next-line:no-console
-       .then((): void => { console.log(`Resume playback`); })
-       // tslint:disable-next-line:no-console
-       .catch((error: Error): void => { console.error(error); });
+    this.audio.src = this.url;
+    this.audio
+      .play()
+      .then(() => console.log('Playback started'))
+      .catch(console.error);
   }
 }
 
-// tslint:disable-next-line:no-default-export export-name
-export default new MediaPlayer(SMODCAST_RADIO_URL);
+export default new MediaPlayer(RADIO_URL);
