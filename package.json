@@ -6,14 +6,14 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.283",
+    "@types/chrome": "0.0.284",
     "chai": "5.1.2",
     "minimist": "1.2.8",
     "mocha": "10.8.2",
     "serialize-javascript": "6.0.2",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.1",
-    "typescript": "5.6.3",
+    "typescript": "5.7.2",
     "webpack": "5.96.1",
     "webpack-cli": "5.1.4"
   },
