@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.304",
-    "chai": "5.1.2",
+    "chai": "5.2.0",
     "minimist": "1.2.8",
     "mocha": "11.1.0",
     "serialize-javascript": "6.0.2",
