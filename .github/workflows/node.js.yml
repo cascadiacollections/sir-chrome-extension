@@ -9,21 +9,33 @@ on:
 
 jobs:
   build:
-    name: CI
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 23.x]
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: latest
+          node-version: ${{ matrix.node-version }}
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}
       - run: yarn install
       - run: yarn build
       - run: yarn test
+      - run: yarn lint
       - name: Move scripts to release folder
         run: mv dist/ app/
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sir-chrome-extension
+          name: sir-chrome-extension-${{ matrix.node-version }}
           path: app
