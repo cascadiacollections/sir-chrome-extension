@@ -27,16 +27,3 @@ jobs:
         with:
           name: sir-chrome-extension
           path: app
-  build-self-hosted:
-    runs-on: 
-      - self-hosted
-    continue-on-error: true # Optional
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: latest
-      - run: yarn install
-      - run: yarn build
-      - run: yarn test
