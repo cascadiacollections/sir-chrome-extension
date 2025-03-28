@@ -6,7 +6,7 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.312",
+    "@types/chrome": "0.0.313",
     "chai": "5.2.0",
     "minimist": "1.2.8",
     "mocha": "11.1.0",
