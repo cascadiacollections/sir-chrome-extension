@@ -5,13 +5,13 @@ class MediaPlayer {
 
   constructor(private url: string) {
     this.#updateBadge();
-    chrome.browserAction.onClicked.addListener(() => this.#toggle());
+    chrome.action.onClicked.addListener(() => this.#toggle());
   }
 
   #getBadgeText = () => (this.#audio.paused ? 'OFF' : 'ON'); // Arrow function for concise logic
 
   #updateBadge = () =>
-    chrome.browserAction.setBadgeText({ text: this.#getBadgeText() }); // Inline badge update
+    chrome.action.setBadgeText({ text: this.#getBadgeText() }); // Inline badge update for Manifest V3
 
   #toggle = () => {
     this.#audio.paused ? this.#play() : this.#stop();
