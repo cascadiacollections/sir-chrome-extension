@@ -93,10 +93,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.3.tgz#282046f03e886e352b2d5f5da5eb755e01457f3f"
   integrity sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==
 
-"@types/chrome@0.0.323":
-  version "0.0.323"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.323.tgz#8e6d3ffaca47a9c8ce6f60d25634d26aba3c4cfb"
-  integrity sha512-ipiDwx41lmGeLnbiT6ENOayvWXdkqKqNwqDQWEuz6dujaX7slSkk1nbSt5Q5c6xnQ708+kuCFrC00VLltSbWVA==
+"@types/chrome@0.0.324":
+  version "0.0.324"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.324.tgz#a20bb0be9e774d7a55efe0d71d6a2ed259e5944d"
+  integrity sha512-puFoA5uJbN9+oaD/MjtMY13H7vPvO/IlSP4pe+uD/c+hB7HsbcOOLVRZlRWgkDSqupw4R+53pS9K9ORHYyMBCg==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
