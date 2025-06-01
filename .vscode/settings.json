@@ -1,4 +1,31 @@
 {
     "editor.tabSize": 2,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "typescript.suggest.autoImports": true,
+    "javascript.preferences.quoteStyle": "single",
+    "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+    "javascript.suggest.autoImports": true,
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/yarn.lock": true,
+        "**/package-lock.json": true
+    },
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/dist": true
+    },
+    "typescript.preferences.importModuleSpecifier": "relative"
 }
