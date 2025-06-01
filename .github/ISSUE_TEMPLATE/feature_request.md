@@ -1,3 +1,4 @@
+---
 name: Feature Request
 description: Suggest an idea for the extension
 title: "[Feature]: "
@@ -60,3 +61,4 @@ body:
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
+---

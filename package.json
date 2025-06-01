@@ -1,6 +1,10 @@
 {
   "name": "sir-smodcast-internet-radio",
   "version": "1.4.3",
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "build": "webpack ./webpack.config.js",
     "test": "mocha"

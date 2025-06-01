@@ -1,3 +1,4 @@
+---
 name: Bug Report
 description: Report a bug to help us improve the extension
 title: "[Bug]: "
@@ -94,3 +95,4 @@ body:
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
+---
