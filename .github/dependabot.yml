@@ -3,24 +3,58 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
       time: "03:00"
+      timezone: "America/Los_Angeles"
     assignees:
+      - "KevinTCoughlin"
+    reviewers:
       - "KevinTCoughlin"
     labels:
       - "dependencies"
       - "npm"
     commit-message:
       prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
       include: "scope"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
+    target-branch: "main"
+    versioning-strategy: "increase"
+    groups:
+      production-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "@types/*"
+          - "*-dev"
+          - "webpack*"
+          - "ts-loader"
+          - "typescript"
+          - "mocha"
+          - "chai"
+          - "sinon*"
+      development-dependencies:
+        patterns:
+          - "@types/*"
+          - "*-dev"
+          - "webpack*"
+          - "ts-loader"
+          - "typescript"
+          - "mocha"
+          - "chai"
+          - "sinon*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
       time: "03:00"
+      timezone: "America/Los_Angeles"
     assignees:
+      - "KevinTCoughlin"
+    reviewers:
       - "KevinTCoughlin"
     labels:
       - "dependencies"
@@ -28,4 +62,5 @@ updates:
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 3
+    target-branch: "main"
