@@ -25,9 +25,7 @@
     },
     "default_title": "S.I.R - Click to Play"
   },
-  "permissions": [
-    "activeTab"
-  ],
+  "permissions": ["activeTab"],
   "web_accessible_resources": [
     {
       "resources": [],

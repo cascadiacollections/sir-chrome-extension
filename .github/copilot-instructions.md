@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides streaming audio functionality with a background service worker. The extension uses TypeScript, modern build tools, and follows Chrome Manifest V3 standards.
+This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides streaming audio
+functionality with a background service worker. The extension uses TypeScript, modern build tools,
+and follows Chrome Manifest V3 standards.
 
 ## Development Guidelines
 
@@ -148,19 +150,19 @@ test/                     # Test files
 
 ```typescript
 // Badge updates with proper typing
-chrome.action.setBadgeText({ text: "ON" });
-chrome.action.setBadgeBackgroundColor({ color: "#00FF00" });
-chrome.action.setTitle({ title: "S.I.R - Playing" });
+chrome.action.setBadgeText({ text: 'ON' });
+chrome.action.setBadgeBackgroundColor({ color: '#00FF00' });
+chrome.action.setTitle({ title: 'S.I.R - Playing' });
 
 // Event listeners
 chrome.action.onClicked.addListener(() => this.#toggle());
-chrome.runtime.onInstalled.addListener((details) => {});
+chrome.runtime.onInstalled.addListener(details => {});
 ```
 
 ### Audio Event Handling
 
 ```typescript
-this.#audio.addEventListener("play", () => {
+this.#audio.addEventListener('play', () => {
   this.#setState({ isPlaying: true, retryCount: 0 });
   this.#updateBadge();
   this.#updateTitle();
@@ -197,7 +199,8 @@ async #handlePlaybackError(): Promise<void> {
 
 ## Extension-Specific Considerations
 
-- **Service Worker Limitations**: Remember that service workers have limitations on long-running processes
+- **Service Worker Limitations**: Remember that service workers have limitations on long-running
+  processes
 - **Audio Permissions**: Handle cases where audio autoplay is blocked
 - **Network Changes**: Implement proper reconnection logic for network interruptions
 - **Extension Updates**: Handle state migration during extension updates
@@ -211,4 +214,5 @@ async #handlePlaybackError(): Promise<void> {
 - Test retry logic and error handling
 - Use descriptive test names that explain the behavior being tested
 
-This project follows modern web development practices with a focus on reliability, maintainability, and user experience.
+This project follows modern web development practices with a focus on reliability, maintainability,
+and user experience.

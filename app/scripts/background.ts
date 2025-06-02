@@ -30,37 +30,37 @@ class MediaPlayer {
   }
 
   #setupAudioEvents(): void {
-    this.#audio.addEventListener("loadstart", () => {
+    this.#audio.addEventListener('loadstart', () => {
       this.#setState({ isLoading: true, hasError: false });
       this.#updateBadge();
     });
 
-    this.#audio.addEventListener("canplay", () => {
+    this.#audio.addEventListener('canplay', () => {
       this.#setState({ isLoading: false });
       this.#updateBadge();
     });
 
-    this.#audio.addEventListener("play", () => {
+    this.#audio.addEventListener('play', () => {
       this.#setState({ isPlaying: true, retryCount: 0 });
       this.#updateBadge();
       this.#updateTitle();
     });
 
-    this.#audio.addEventListener("pause", () => {
+    this.#audio.addEventListener('pause', () => {
       this.#setState({ isPlaying: false });
       this.#updateBadge();
       this.#updateTitle();
     });
 
-    this.#audio.addEventListener("error", (event) => {
+    this.#audio.addEventListener('error', event => {
       // eslint-disable-next-line no-console
-      console.error("Audio error:", event);
+      console.error('Audio error:', event);
       this.#setState({ hasError: true, isLoading: false, isPlaying: false });
       this.#updateBadge();
       this.#handlePlaybackError();
     });
 
-    this.#audio.addEventListener("ended", () => {
+    this.#audio.addEventListener('ended', () => {
       // Stream shouldn't end normally, try to reconnect
       this.#handlePlaybackError();
     });
@@ -70,14 +70,14 @@ class MediaPlayer {
     chrome.action.onClicked.addListener(() => this.#toggle());
 
     // Handle extension installation/update
-    chrome.runtime.onInstalled.addListener((details) => {
-      if (details.reason === "install") {
+    chrome.runtime.onInstalled.addListener(details => {
+      if (details.reason === 'install') {
         // eslint-disable-next-line no-console
-        console.log("S.I.R Extension installed");
-      } else if (details.reason === "update") {
+        console.log('S.I.R Extension installed');
+      } else if (details.reason === 'update') {
         // eslint-disable-next-line no-console
         console.log(
-          "S.I.R Extension updated to version",
+          'S.I.R Extension updated to version',
           chrome.runtime.getManifest().version
         );
       }
@@ -90,22 +90,22 @@ class MediaPlayer {
 
   #getBadgeText(): string {
     if (this.#state.isLoading) {
-      return "...";
+      return '...';
     }
     if (this.#state.hasError) {
-      return "ERR";
+      return 'ERR';
     }
-    return this.#state.isPlaying ? "ON" : "OFF";
+    return this.#state.isPlaying ? 'ON' : 'OFF';
   }
 
   #getBadgeColor(): string {
     if (this.#state.hasError) {
-      return "#FF0000";
+      return '#FF0000';
     }
     if (this.#state.isLoading) {
-      return "#FFA500";
+      return '#FFA500';
     }
-    return this.#state.isPlaying ? "#00FF00" : "#808080";
+    return this.#state.isPlaying ? '#00FF00' : '#808080';
   }
 
   #updateBadge(): void {
@@ -118,8 +118,8 @@ class MediaPlayer {
 
   #updateTitle(): void {
     const title = this.#state.isPlaying
-      ? "S.I.R - Playing"
-      : "S.I.R - Click to Play";
+      ? 'S.I.R - Playing'
+      : 'S.I.R - Click to Play';
     chrome.action.setTitle({ title });
   }
 
@@ -129,14 +129,14 @@ class MediaPlayer {
     } else {
       this.#play().catch((error: Error) => {
         // eslint-disable-next-line no-console
-        console.error("Failed to start playback:", error);
+        console.error('Failed to start playback:', error);
       });
     }
   }
 
   #stop(): void {
     this.#audio.pause();
-    this.#audio.src = "";
+    this.#audio.src = '';
     this.#setState({ isPlaying: false, isLoading: false, hasError: false });
     this.#updateBadge();
     this.#updateTitle();
@@ -152,10 +152,10 @@ class MediaPlayer {
 
       await this.#audio.play();
       // eslint-disable-next-line no-console
-      console.log("S.I.R playback started successfully");
+      console.log('S.I.R playback started successfully');
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error("S.I.R playback failed:", error);
+      console.error('S.I.R playback failed:', error);
       this.#setState({ hasError: true, isLoading: false });
       this.#updateBadge();
       throw error;
@@ -165,7 +165,7 @@ class MediaPlayer {
   async #handlePlaybackError(): Promise<void> {
     if (this.#state.retryCount >= this.#config.maxRetries) {
       // eslint-disable-next-line no-console
-      console.error("Max retries reached, giving up");
+      console.error('Max retries reached, giving up');
       this.#setState({ hasError: true });
       this.#updateBadge();
       return;
@@ -179,7 +179,7 @@ class MediaPlayer {
       })`
     );
 
-    await new Promise((resolve) => {
+    await new Promise(resolve => {
       setTimeout(resolve, this.#config.retryDelay);
     });
 
@@ -187,7 +187,7 @@ class MediaPlayer {
       await this.#play();
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error("Retry failed:", error);
+      console.error('Retry failed:', error);
       // Will trigger another retry if under max retries
       setTimeout(() => {
         this.#handlePlaybackError();
@@ -206,7 +206,7 @@ class MediaPlayer {
 }
 
 const RADIO_CONFIG: RadioConfig = {
-  url: "https://64.150.176.42:8242/;stream.mp3",
+  url: 'https://64.150.176.42:8242/;stream.mp3',
   maxRetries: 3,
   retryDelay: 2000,
 };

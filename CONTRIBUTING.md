@@ -1,6 +1,7 @@
 # Contributing to S.I.R Chrome Extension
 
-Thank you for your interest in contributing to the S.I.R Chrome Extension! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to the S.I.R Chrome Extension! This document provides
+guidelines and information for contributors.
 
 ## Development Setup
 

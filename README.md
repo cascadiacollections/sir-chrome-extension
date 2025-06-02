@@ -10,7 +10,8 @@ Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
 - 🎵 **One-click playback** - Click the extension icon to start/stop the radio stream
 - 🔄 **Auto-retry** - Automatically attempts to reconnect if the stream is interrupted
 - 📊 **Visual feedback** - Badge shows current status (OFF/ON/Loading/Error)
-- 🎨 **Color-coded badges** - Green for playing, gray for stopped, orange for loading, red for errors
+- 🎨 **Color-coded badges** - Green for playing, gray for stopped, orange for loading, red for
+  errors
 - ⚡ **Lightweight** - Minimal resource usage with efficient background processing
 - 🔧 **Manifest V3** - Built with the latest Chrome extension standards
 
@@ -18,7 +19,8 @@ Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
 
 ### From Chrome Web Store
 
-1. Visit the [Chrome Web Store page](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
+1. Visit the
+   [Chrome Web Store page](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
 2. Click "Add to Chrome"
 
 ### From Source
@@ -128,8 +130,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer
 
-This is an unofficial Chrome extension for S.I.R (Smodcast Internet Radio). It is not affiliated with or endorsed by Kevin Smith, SModcast, or any related entities.
+This is an unofficial Chrome extension for S.I.R (Smodcast Internet Radio). It is not affiliated
+with or endorsed by Kevin Smith, SModcast, or any related entities.
 
 ## Support
 
-If you encounter any issues or have suggestions, please [open an issue](https://github.com/cascadiacollections/sir-chrome-extension/issues) on GitHub.
+If you encounter any issues or have suggestions, please
+[open an issue](https://github.com/cascadiacollections/sir-chrome-extension/issues) on GitHub.

@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
+    "lint:fix": "eslint --fix app/scripts test",
+    "pre-commit": "npm run format && npm run lint && npm run type-check && npm test"
+  }
+}

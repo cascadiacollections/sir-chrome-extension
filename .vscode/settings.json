@@ -21,11 +21,19 @@
         "**/node_modules": true,
         "**/dist": true,
         "**/yarn.lock": true,
-        "**/package-lock.json": true
+        "**/package-lock.json": true,
+        "**/*.map": true
     },
     "files.exclude": {
         "**/node_modules": true,
-        "**/dist": true
+        "**/dist": true,
+        "**/*.map": true
     },
-    "typescript.preferences.importModuleSpecifier": "relative"
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "emmet.includeLanguages": {
+        "typescript": "html"
+    },
+    "npm.packageManager": "npm",
+    "mocha.files.glob": "test/**/*.mjs",
+    "testExplorer.useNativeTesting": true
 }

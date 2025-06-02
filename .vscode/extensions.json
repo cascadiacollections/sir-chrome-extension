@@ -1,17 +1,55 @@
 {
-    "recommendations": [
-        "ms-vscode.vscode-typescript-next",
-        "esbenp.prettier-vscode",
-        "ms-vscode.vscode-json",
-        "bradlc.vscode-tailwindcss",
-        "ms-vscode.vscode-eslint",
-        "formulahendry.auto-rename-tag",
-        "christian-kohler.path-intellisense",
-        "ms-vscode.extension-test-runner",
-        "gruntfuggly.todo-tree",
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "unwantedRecommendations": [
-        "ms-vscode.vscode-typescript"
-    ]
+  "recommendations": [
+    // TypeScript and JavaScript
+    "ms-vscode.vscode-typescript-next",
+    "ms-vscode.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "visualstudioexptteam.vscodeintellicode",
+
+    // Testing
+    "ms-vscode.extension-test-runner",
+    "hbenl.vscode-mocha-test-adapter",
+    "ms-vscode.test-adapter-converter",
+
+    // GitHub Copilot
+    "github.copilot",
+    "github.copilot-chat",
+
+    // File formats
+    "ms-vscode.vscode-json",
+    "ms-vscode.vscode-json5",
+    "redhat.vscode-yaml",
+
+    // Documentation
+    "ms-vscode.vscode-markdown",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+
+    // Code quality and productivity
+    "streetsidesoftware.code-spell-checker",
+    "gruntfuggly.todo-tree",
+    "eamodio.gitlens",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+
+    // Chrome extension development
+    "aaravb.chrome-extension-developer-tools",
+    "cezaraugusto.vscode-chrome-extesion-manifest-json-schema",
+    "vaibhavvishal.web-extension",
+    "ms-vscode.js-debug-nightly",
+    "peakchen90.open-html-in-browser",
+    "ms-vscode.vscode-chrome-debug",
+    "firefox-devtools.vscode-firefox-debug",
+    "ms-vscode.hexeditor",
+
+    // Web development
+    "bradlc.vscode-tailwindcss",
+    "tobermory.es6-string-html",
+    "ritwickdey.liveserver",
+
+    // Build tools
+    "ms-vscode.vscode-webpack",
+    "ms-vscode.vscode-npm-scripts"
+  ],
+  "unwantedRecommendations": ["ms-vscode.vscode-typescript"]
 }

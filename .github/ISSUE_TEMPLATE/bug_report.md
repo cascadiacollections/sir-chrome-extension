@@ -1,8 +1,8 @@
 ---
 name: Bug Report
 description: Report a bug to help us improve the extension
-title: "[Bug]: "
-labels: ["bug", "triage"]
+title: '[Bug]: '
+labels: ['bug', 'triage']
 assignees:
   - KevinTCoughlin
 body:

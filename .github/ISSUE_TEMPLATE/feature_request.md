@@ -1,8 +1,8 @@
 ---
 name: Feature Request
 description: Suggest an idea for the extension
-title: "[Feature]: "
-labels: ["enhancement", "feature-request"]
+title: '[Feature]: '
+labels: ['enhancement', 'feature-request']
 assignees:
   - KevinTCoughlin
 body:
@@ -37,7 +37,8 @@ body:
     id: alternatives
     attributes:
       label: Describe alternatives you've considered
-      description: A clear and concise description of any alternative solutions or features you've considered.
+      description:
+        A clear and concise description of any alternative solutions or features you've considered.
   - type: dropdown
     id: complexity
     attributes:

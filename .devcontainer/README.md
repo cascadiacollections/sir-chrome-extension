@@ -1,6 +1,7 @@
 # Dev Container
 
-This project uses [Dev Containers](https://containers.dev/) to provide a consistent development environment.
+This project uses [Dev Containers](https://containers.dev/) to provide a consistent development
+environment.
 
 ## Features
 
