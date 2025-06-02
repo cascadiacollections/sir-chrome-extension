@@ -1,18 +1,32 @@
 // @ts-check
+const path = require("path");
+
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
-  devtool: 'inline-source-map',
-  entry: './app/scripts/background.ts',
+  mode: process.env.NODE_ENV || "development",
+  devtool:
+    process.env.NODE_ENV === "production" ? "source-map" : "inline-source-map",
+  entry: {
+    background: "./app/scripts/background.ts",
+  },
   output: {
-    filename: 'background.js'
+    path: path.resolve(__dirname, "app/dist"),
+    filename: "[name].js",
+    clean: true,
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js']
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader' }
-    ]
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
   },
-  plugins: []
-}
+  optimization: {
+    minimize: process.env.NODE_ENV === "production",
+  },
+  plugins: [],
+};

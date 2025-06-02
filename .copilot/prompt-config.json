@@ -1,0 +1,20 @@
+{
+  "context": [
+    "This project is a Chrome extension written in TypeScript, using Node.js 24, Webpack, and modern best practices.",
+    "The codebase is organized with source files in the 'app/scripts' directory, assets in 'app/images', and localization in 'app/_locales'.",
+    "All code should be idiomatic, secure, and leverage the latest ECMAScript and TypeScript features.",
+    "Use async/await for asynchronous code, and prefer const/let over var.",
+    "Follow Chrome extension manifest v3 conventions.",
+    "Tests are located in the 'test' directory and use Mocha and Chai.",
+    "Assume the dev environment uses VS Code, Prettier, and ESLint."
+  ],
+  "instructions": [
+    "Generate code in TypeScript unless otherwise specified.",
+    "Prefer modular, reusable functions and clear separation of concerns.",
+    "Add JSDoc comments for exported functions and classes.",
+    "Use strict typing and avoid 'any' unless absolutely necessary.",
+    "For Chrome extension APIs, use the '@types/chrome' definitions.",
+    "When writing tests, use Mocha and Chai syntax.",
+    "Format all code with Prettier conventions."
+  ]
+}

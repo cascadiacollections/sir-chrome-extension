@@ -1,25 +1,55 @@
 {
   "name": "sir-smodcast-internet-radio",
   "version": "1.4.3",
+  "description": "Unofficial Chrome Extension for listening to Kevin Smith's SModcast Internet Radio, S.I.R.",
   "engines": {
     "node": ">=24.0.0",
     "npm": ">=10.0.0"
   },
   "scripts": {
-    "build": "webpack ./webpack.config.js",
-    "test": "mocha"
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "build:watch": "webpack --mode=development --watch",
+    "test": "mocha test/**/*.mjs",
+    "test:watch": "mocha test/**/*.mjs --watch",
+    "lint": "eslint app/**/*.ts",
+    "lint:fix": "eslint app/**/*.ts --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf app/dist node_modules",
+    "package": "npm run build && npm run test && zip -r extension.zip app/ -x '*.ts' '*.map'",
+    "dev": "npm run build:dev && npm run type-check"
   },
   "devDependencies": {
     "@types/chrome": "0.0.326",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "chai": "5.2.0",
+    "eslint": "^9.16.0",
     "minimist": "1.2.8",
     "mocha": "11.5.0",
     "serialize-javascript": "6.0.2",
+    "sinon": "^20.0.0",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.2",
     "typescript": "5.8.3",
     "webpack": "5.99.9",
     "webpack-cli": "6.0.1"
   },
-  "license": "MIT"
+  "keywords": [
+    "chrome-extension",
+    "smodcast",
+    "radio",
+    "kevin-smith",
+    "sir"
+  ],
+  "author": "Kevin Coughlin",
+  "license": "MIT",
+  "homepage": "https://kevintcoughlin.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cascadiacollections/sir-chrome-extension.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cascadiacollections/sir-chrome-extension/issues"
+  }
 }
