@@ -1,11 +1,13 @@
 # GitHub Copilot Instructions for S.I.R Chrome Extension
 
 ## Project Overview
+
 This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides streaming audio functionality with a background service worker. The extension uses TypeScript, modern build tools, and follows Chrome Manifest V3 standards.
 
 ## Development Guidelines
 
 ### TypeScript Standards
+
 - Use strict TypeScript configuration with explicit return types
 - Prefer private class fields (`#field`) for encapsulation
 - Use interfaces for type definitions (`RadioConfig`, `PlaybackState`)
@@ -13,12 +15,14 @@ This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides str
 - Use `const` over `let`, never use `var`
 
 ### Chrome Extension Best Practices
+
 - Follow Manifest V3 patterns with service workers
 - Use `chrome.action` API for extension badge and clicks
 - Handle Chrome extension lifecycle events properly
 - Implement proper error handling for Chrome API calls
 
 ### Code Organization
+
 - Keep functions small and focused (single responsibility)
 - Use descriptive variable and function names
 - Group related functionality into classes
@@ -26,30 +30,35 @@ This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides str
 - Use dependency injection patterns where appropriate
 
 ### Error Handling
+
 - Implement retry logic for network failures
 - Use proper error boundaries and graceful degradation
 - Log errors with context for debugging
 - Provide visual feedback for error states
 
 ### Audio Management
+
 - Handle all audio events (loadstart, canplay, play, pause, error, ended)
 - Implement proper cleanup for audio resources
 - Use async/await for audio operations
 - Handle browser autoplay policies
 
 ### State Management
+
 - Use explicit state objects with clear interfaces
 - Implement immutable state updates
 - Keep state changes predictable and traceable
 - Separate UI state from business logic
 
 ### Testing Approach
+
 - Write unit tests for core functionality
 - Mock Chrome APIs using sinon-chrome
 - Test error conditions and edge cases
 - Maintain good test coverage
 
 ### Code Quality
+
 - Follow ESLint rules and fix warnings
 - Use proper JSDoc comments for public methods
 - Keep code DRY (Don't Repeat Yourself)
@@ -58,40 +67,42 @@ This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides str
 ## Architecture Patterns
 
 ### MediaPlayer Class Structure
+
 ```typescript
 class MediaPlayer {
   readonly #audio = new Audio();
   readonly #config: RadioConfig;
   #state: PlaybackState;
-  
-  constructor(config: RadioConfig) { }
-  
+
+  constructor(config: RadioConfig) {}
+
   // Event setup methods
-  #setupAudioEvents(): void { }
-  #setupChromeEvents(): void { }
-  
+  #setupAudioEvents(): void {}
+  #setupChromeEvents(): void {}
+
   // State management
-  #setState(updates: Partial<PlaybackState>): void { }
-  
+  #setState(updates: Partial<PlaybackState>): void {}
+
   // UI updates
-  #updateBadge(): void { }
-  #updateTitle(): void { }
-  
+  #updateBadge(): void {}
+  #updateTitle(): void {}
+
   // Core functionality
-  #toggle(): void { }
-  #play(): Promise<void> { }
-  #stop(): void { }
-  
+  #toggle(): void {}
+  #play(): Promise<void> {}
+  #stop(): void {}
+
   // Error handling
-  #handlePlaybackError(): Promise<void> { }
-  
+  #handlePlaybackError(): Promise<void> {}
+
   // Public API
-  public getState(): Readonly<PlaybackState> { }
-  public isPlaying(): boolean { }
+  public getState(): Readonly<PlaybackState> {}
+  public isPlaying(): boolean {}
 }
 ```
 
 ### Configuration Interface
+
 ```typescript
 interface RadioConfig {
   readonly url: string;
@@ -110,6 +121,7 @@ interface PlaybackState {
 ## Build and Development
 
 ### Scripts Usage
+
 - `npm run build:dev` - Development build with source maps
 - `npm run build:watch` - Watch mode for active development
 - `npm run build` - Production build
@@ -118,6 +130,7 @@ interface PlaybackState {
 - `npm run type-check` - TypeScript validation
 
 ### File Structure
+
 ```
 app/
 ├── manifest.json          # Extension manifest (Manifest V3)
@@ -132,20 +145,22 @@ test/                     # Test files
 ## Common Patterns
 
 ### Chrome API Usage
+
 ```typescript
 // Badge updates with proper typing
-chrome.action.setBadgeText({ text: 'ON' });
-chrome.action.setBadgeBackgroundColor({ color: '#00FF00' });
-chrome.action.setTitle({ title: 'S.I.R - Playing' });
+chrome.action.setBadgeText({ text: "ON" });
+chrome.action.setBadgeBackgroundColor({ color: "#00FF00" });
+chrome.action.setTitle({ title: "S.I.R - Playing" });
 
 // Event listeners
 chrome.action.onClicked.addListener(() => this.#toggle());
-chrome.runtime.onInstalled.addListener((details) => { });
+chrome.runtime.onInstalled.addListener((details) => {});
 ```
 
 ### Audio Event Handling
+
 ```typescript
-this.#audio.addEventListener('play', () => {
+this.#audio.addEventListener("play", () => {
   this.#setState({ isPlaying: true, retryCount: 0 });
   this.#updateBadge();
   this.#updateTitle();
@@ -153,16 +168,17 @@ this.#audio.addEventListener('play', () => {
 ```
 
 ### Error Handling with Retry
+
 ```typescript
 async #handlePlaybackError(): Promise<void> {
   if (this.#state.retryCount >= this.#config.maxRetries) {
     this.#setState({ hasError: true });
     return;
   }
-  
+
   this.#setState({ retryCount: this.#state.retryCount + 1 });
   await new Promise(resolve => setTimeout(resolve, this.#config.retryDelay));
-  
+
   try {
     await this.#play();
   } catch (error) {
