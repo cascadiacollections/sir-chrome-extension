@@ -49,7 +49,7 @@ jobs:
         run: |
           mkdir -p release
           cp -r app/* release/
-          cp dist/background.js release/scripts/
+          cp app/dist/background.js release/scripts/
 
       - name: Upload extension artifact
         if: matrix.node-version == '24.x'
