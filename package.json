@@ -24,10 +24,10 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.326",
-    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.15.0",
     "chai": "5.2.0",
-    "eslint": "^9.16.0",
+    "eslint": "^9.29.0",
     "minimist": "1.2.8",
     "mocha": "11.5.0",
     "prettier": "^3.5.3",
