@@ -29,7 +29,7 @@
     "chai": "5.2.0",
     "eslint": "^9.29.0",
     "minimist": "1.2.8",
-    "mocha": "11.6.0",
+    "mocha": "11.7.1",
     "prettier": "^3.6.0",
     "serialize-javascript": "6.0.2",
     "sinon": "^21.0.0",
