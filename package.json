@@ -23,10 +23,10 @@
     "dev": "npm run build:dev && npm run type-check"
   },
   "devDependencies": {
-    "@types/chrome": "0.1.3",
+    "@types/chrome": "0.1.4",
     "@typescript-eslint/eslint-plugin": "^8.39.1",
     "@typescript-eslint/parser": "^8.15.0",
-    "chai": "5.2.1",
+    "chai": "6.0.1",
     "eslint": "^9.33.0",
     "minimist": "1.2.8",
     "mocha": "11.7.1",
@@ -36,7 +36,7 @@
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.2",
     "typescript": "5.9.2",
-    "webpack": "5.101.0",
+    "webpack": "5.101.3",
     "webpack-cli": "6.0.1"
   },
   "keywords": [
