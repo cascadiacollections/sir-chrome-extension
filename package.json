@@ -23,13 +23,13 @@
     "dev": "npm run build:dev && npm run type-check"
   },
   "devDependencies": {
-    "@types/chrome": "0.1.4",
+    "@types/chrome": "0.1.6",
     "@typescript-eslint/eslint-plugin": "^8.40.0",
     "@typescript-eslint/parser": "^8.15.0",
     "chai": "6.0.1",
     "eslint": "^9.34.0",
     "minimist": "1.2.8",
-    "mocha": "11.7.1",
+    "mocha": "11.7.2",
     "prettier": "^3.6.2",
     "serialize-javascript": "6.0.2",
     "sinon": "^21.0.0",
