@@ -23,7 +23,7 @@
     "dev": "npm run build:dev && npm run type-check"
   },
   "devDependencies": {
-    "@types/chrome": "0.1.6",
+    "@types/chrome": "0.1.11",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.15.0",
     "chai": "6.0.1",
