@@ -145,6 +145,11 @@ Click the extension icon to test:
 Run all quality checks to ensure everything is working:
 
 ```bash
+# Quick validation (runs all checks)
+npm run validate-setup
+
+# Or run individual checks:
+
 # Type checking
 npm run type-check
 

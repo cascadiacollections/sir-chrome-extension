@@ -2,6 +2,8 @@
 
 Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
 
+> **Quick Links**: [🚀 Quickstart](QUICKSTART.md) | [📖 Onboarding Guide](ONBOARDING.md) | [💻 Development Docs](DEVELOPMENT.md) | [🤝 Contributing](CONTRIBUTING.md)
+
 [![CI/CD](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/gmmjhhjkjopgmnpidenddlplckefdbjd.svg)](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D24.0.0-brightgreen)](https://nodejs.org)
