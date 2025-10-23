@@ -28,3 +28,15 @@ If the automatic setup doesn't work:
 2. Run "Dev Containers: Reopen in Container"
 
 The container will automatically run `npm install && npm run build:dev` after creation and `npm run type-check` on each start to ensure your environment is healthy.
+
+## Benefits
+
+Using the dev container provides:
+
+- **Zero Configuration**: All tools and extensions pre-installed
+- **Consistency**: Same environment for all developers
+- **Isolation**: No conflicts with your local Node.js setup
+- **Speed**: Get coding in minutes, not hours
+- **Best Practices**: GitHub Copilot and recommended extensions included
+
+Perfect for contributors and maintainers alike!
