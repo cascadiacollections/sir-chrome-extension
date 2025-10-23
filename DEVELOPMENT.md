@@ -4,9 +4,10 @@
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js >= 24.0.0
+- npm >= 10.0.0
 - Chrome browser
-- VS Code with recommended extensions
+- VS Code with recommended extensions (or use Dev Container)
 
 ### Setup
 

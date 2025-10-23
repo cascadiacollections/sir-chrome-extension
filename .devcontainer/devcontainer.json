@@ -19,7 +19,9 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "npm install && npm run build:dev",
+  // Use 'postStartCommand' to run commands each time the container starts.
+  "postStartCommand": "npm run type-check",
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
@@ -28,7 +30,9 @@
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-eslint",
         "bradlc.vscode-tailwindcss",
-        "ms-vscode.vscode-json"
+        "ms-vscode.vscode-json",
+        "github.copilot",
+        "github.copilot-chat"
       ],
       "settings": {
         "typescript.preferences.importModuleSpecifier": "relative",

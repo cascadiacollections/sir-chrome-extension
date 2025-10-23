@@ -2,8 +2,10 @@
 
 Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
 
-[![main CI](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/node.js.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/node.js.yml)
+[![CI/CD](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/gmmjhhjkjopgmnpidenddlplckefdbjd.svg)](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D24.0.0-brightgreen)](https://nodejs.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Features
 
@@ -25,12 +27,18 @@ Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
 
 ### From Source
 
-1. Clone this repository
-2. Run `npm install` to install dependencies
-3. Run `npm run build` to build the extension
-4. Open Chrome and navigate to `chrome://extensions/`
-5. Enable "Developer mode"
-6. Click "Load unpacked" and select the `app` folder
+See the [Onboarding Guide](ONBOARDING.md) for detailed setup instructions.
+
+Quick start:
+
+```bash
+git clone https://github.com/cascadiacollections/sir-chrome-extension.git
+cd sir-chrome-extension
+npm install
+npm run build
+```
+
+Then load the `app` folder as an unpacked extension in Chrome.
 
 ## Development
 
@@ -110,6 +118,10 @@ tsconfig.json           # TypeScript configuration
 - Chromium-based browsers (Edge, Brave, etc.)
 
 ## Contributing
+
+We welcome contributions! Please see our [Onboarding Guide](ONBOARDING.md) for getting started and [Contributing Guidelines](CONTRIBUTING.md) for the full process.
+
+Quick steps:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
