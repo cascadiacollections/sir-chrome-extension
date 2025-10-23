@@ -42,12 +42,14 @@ Then load the `app` folder as an unpacked extension in Chrome.
 
 ## Development
 
+New contributors should start with the [Onboarding Guide](ONBOARDING.md).
+
 ### Prerequisites
 
 - Node.js >= 24.0.0
 - npm >= 10.0.0
 
-### Setup
+### Quick Start
 
 ```bash
 # Install dependencies
@@ -68,6 +70,19 @@ npm run test
 # Lint code
 npm run lint
 ```
+
+### Dev Container (Recommended)
+
+This project includes a dev container configuration for consistent development environments:
+
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
+2. Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code
+3. Open the project in VS Code
+4. Click "Reopen in Container" when prompted
+
+The dev container includes all dependencies and tools pre-configured!
+
+For detailed development information, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ### Project Structure
 

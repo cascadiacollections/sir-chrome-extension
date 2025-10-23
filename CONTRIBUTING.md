@@ -11,6 +11,8 @@ guidelines and information for contributors.
 - npm >= 10.0.0
 - Git
 
+**New to the project?** Check out our [Onboarding Guide](ONBOARDING.md) for a comprehensive walkthrough!
+
 ### Getting Started
 
 1. Fork the repository on GitHub
