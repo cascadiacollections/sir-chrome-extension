@@ -179,9 +179,32 @@ npm test
 
 ### Deploy for Testing
 
+#### Option 1: Using npm package script (Recommended)
+
+```bash
+npm run package
+```
+
+This creates `extension.zip` with:
+- Minified production build (~4KB)
+- No source maps or TypeScript files
+- manifest.json at the root (ready for Chrome installation)
+
+#### Option 2: Manual packaging
+
 1. Run `npm run build`
-2. Zip the `/app` folder
-3. Share for manual installation or submit to Chrome Web Store
+2. Navigate to `/app` folder and create zip:
+   ```bash
+   cd app && zip -r ../extension.zip . -x "*.ts" "*.map" "scripts/*.ts"
+   ```
+3. Share `extension.zip` for manual installation or submit to Chrome Web Store
+
+#### Installing the packaged extension
+
+1. Unzip the `extension.zip` file
+2. Open Chrome and navigate to `chrome://extensions/`
+3. Enable "Developer mode"
+4. Click "Load unpacked" and select the extracted folder
 
 ## Troubleshooting
 
