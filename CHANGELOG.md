@@ -5,6 +5,19 @@ All notable changes to the S.I.R Chrome Extension will be documented in this fil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed webpack configuration to properly detect and apply production mode minification
+- Fixed npm package script to create zip with correct structure (manifest.json at root)
+
+### Changed
+
+- Production builds now properly minified (~4KB vs ~27KB unminified)
+- Package script now matches CI workflow structure for consistency
+- Webpack config now uses `argv.mode` instead of `process.env.NODE_ENV` for mode detection
+
 ## [1.4.3] - 2025-06-02
 
 ### Added
