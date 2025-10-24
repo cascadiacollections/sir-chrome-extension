@@ -19,7 +19,7 @@
     "format": "prettier --write \"**/*.{js,ts,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
     "pre-commit": "npm run format && npm run lint && npm run type-check && npm test",
-    "package": "npm run build && npm run test && zip -r extension.zip app/ -x '*.ts' '*.map'",
+    "package": "npm run build && npm run test && cd app && zip -r ../extension.zip . -x '*.ts' '*.map' 'scripts/*.ts'",
     "dev": "npm run build:dev && npm run type-check",
     "validate-setup": "bash tools/validate-setup.sh"
   },
