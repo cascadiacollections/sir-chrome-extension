@@ -2,10 +2,10 @@
 const path = require('path');
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === 'production';
+  const isProduction = argv && argv.mode === 'production';
   
   return {
-    mode: argv.mode || 'development',
+    mode: (argv && argv.mode) || 'development',
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     entry: {
       background: './app/scripts/background.ts',
