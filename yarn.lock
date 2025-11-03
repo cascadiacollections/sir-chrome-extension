@@ -233,10 +233,10 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.3.tgz"
   integrity sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==
 
-"@types/chrome@0.1.24":
-  version "0.1.24"
-  resolved "https://registry.npmjs.org/@types/chrome/-/chrome-0.1.24.tgz"
-  integrity sha512-9iO9HL2bMeGS4C8m6gNFWUyuPE5HEUFk+rGh+7oriUjg+ata4Fc9PoVlu8xvGm7yoo3AmS3J6fAjoFj61NL2rw==
+"@types/chrome@0.1.27":
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.1.27.tgz#16409562ab7628ece917f7f602ae60b620db99cd"
+  integrity sha512-pkkCb0Ft8X+Igi751POzT+YqchSxUCtB6s4Gs6ttgSj8qzJga/qlJMgSW1mKxuQTW4i0sTqQbqVtzXDS5AU+4A==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
