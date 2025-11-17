@@ -233,10 +233,10 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.3.tgz"
   integrity sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==
 
-"@types/chrome@0.1.27":
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.1.27.tgz#16409562ab7628ece917f7f602ae60b620db99cd"
-  integrity sha512-pkkCb0Ft8X+Igi751POzT+YqchSxUCtB6s4Gs6ttgSj8qzJga/qlJMgSW1mKxuQTW4i0sTqQbqVtzXDS5AU+4A==
+"@types/chrome@0.1.29":
+  version "0.1.29"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.1.29.tgz#4fd73361b86a880d61f0207a8a57370f64b813ad"
+  integrity sha512-AMEjLNCFjLWEqXJNbSgZk9+kaC8SX0FOCd46ZZqE2IaCzmeRGbFEhCEbhoV6kzale+WqSeiiqjHgA7Q31shdoA==
   dependencies:
     "@types/filesystem" "*"
     "@types/har-format" "*"
@@ -735,10 +735,10 @@ caniuse-lite@^1.0.30001751:
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001751.tgz"
   integrity sha512-A0QJhug0Ly64Ii3eIqHu5X51ebln3k4yTUkY1j8drqpWHVreg/VLijN48cZ1bYPiqOQuqpkIKnzr/Ul8V+p6Cw==
 
-chai@6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/chai/-/chai-6.2.0.tgz"
-  integrity sha512-aUTnJc/JipRzJrNADXVvpVqi6CO0dn3nx4EVPxijri+fj3LUUDyZQOgVeW54Ob3Y1Xh9Iz8f+CgaCl8v0mn9bA==
+chai@6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/chai/-/chai-6.2.1.tgz#d1e64bc42433fbee6175ad5346799682060b5b6a"
+  integrity sha512-p4Z49OGG5W/WBCPSS/dH3jQ73kD6tiMmUM+bckNK6Jr5JHMG3k9bg/BvKR8lKmtVBKmOiuVaV2ws8s9oSbwysg==
 
 chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.2"
