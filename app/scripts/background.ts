@@ -206,7 +206,7 @@ class MediaPlayer {
 }
 
 const RADIO_CONFIG: RadioConfig = {
-  url: 'https://64.150.176.42:8242/;stream.mp3',
+  url: 'https://broadcast.shoutcheap.com/proxy/willradio/stream',
   maxRetries: 3,
   retryDelay: 2000,
 };
