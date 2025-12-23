@@ -64,9 +64,9 @@ describe("S.I.R Chrome Extension", function () {
 
   describe("Extension Configuration", function () {
     it("should have valid radio URL format", function () {
-      const radioUrl = "https://64.150.176.42:8242/;stream.mp3";
+      const radioUrl = "https://broadcast.shoutcheap.com/proxy/willradio/stream";
       expect(radioUrl).to.match(/^https?:\/\/.+/);
-      expect(radioUrl).to.include(".mp3");
+      expect(radioUrl).to.include("stream");
     });
 
     it("should have reasonable retry configuration", function () {
