@@ -1,3 +1,5 @@
+/// <reference types="chrome-types" />
+
 interface RadioConfig {
   readonly url: string;
   readonly maxRetries: number;
@@ -78,7 +80,7 @@ class MediaPlayer {
         // eslint-disable-next-line no-console
         console.log(
           'S.I.R Extension updated to version',
-          chrome.runtime.getManifest().version
+          chrome.runtime.getManifest()['version']
         );
       }
     });
