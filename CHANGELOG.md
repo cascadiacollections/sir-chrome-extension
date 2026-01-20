@@ -7,16 +7,24 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- **Modernized Chrome type definitions**: Migrated from deprecated `@types/chrome` (0.1.34) to official Google-maintained `chrome-types` (0.1.414)
+- **Updated TypeScript target**: Upgraded from ES2020 to ES2023 for latest JavaScript features
+- **Improved module resolution**: Changed from `node` to `bundler` for better modern bundling support
+- **Updated dependencies**: Updated @typescript-eslint packages to latest minor versions
+
 ### Fixed
 
 - Fixed webpack configuration to properly detect and apply production mode minification
 - Fixed npm package script to create zip with correct structure (manifest.json at root)
 
-### Changed
+### Technical Improvements
 
-- Production builds now properly minified (~4KB vs ~27KB unminified)
+- Production builds now properly minified (~2.5KB vs ~4KB previously)
 - Package script now matches CI workflow structure for consistency
 - Webpack config now uses `argv.mode` instead of `process.env.NODE_ENV` for mode detection
+- Added triple-slash reference directive for chrome-types integration
 
 ## [1.4.3] - 2025-06-02
 

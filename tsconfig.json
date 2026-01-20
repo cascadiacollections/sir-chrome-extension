@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2023",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "bundler",
+    "lib": ["ES2023", "DOM"],
     "outDir": "./dist",
     "rootDir": "./app",
     "strict": true,
@@ -24,8 +24,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "types": ["chrome"]
+    "allowUnreachableCode": false
   },
   "include": ["app/**/*"],
   "exclude": ["node_modules", "dist", "test"]
