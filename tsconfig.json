@@ -24,7 +24,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
+    "allowUnreachableCode": false
   },
   "include": ["app/**/*"],
   "exclude": ["node_modules", "dist", "test"]

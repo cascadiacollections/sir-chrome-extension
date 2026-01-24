@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = (env, argv) => {
   const isProduction = argv && argv.mode === 'production';
-  
+
   return {
     mode: (argv && argv.mode) || 'development',
     devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -22,7 +22,16 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.tsx?$/,
-          use: 'ts-loader',
+          use: {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: false,
+              compilerOptions: {
+                module: 'esnext',
+                target: 'es2023',
+              },
+            },
+          },
           exclude: /node_modules/,
         },
       ],

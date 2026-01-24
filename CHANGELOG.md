@@ -9,10 +9,14 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- **Modernized Chrome type definitions**: Migrated from deprecated `@types/chrome` (0.1.34) to official Google-maintained `chrome-types` (0.1.414)
+- **Modernized Chrome type definitions**: Migrated from deprecated `@types/chrome` (0.1.34) to
+  official Google-maintained `chrome-types` (0.1.414)
 - **Updated TypeScript target**: Upgraded from ES2020 to ES2023 for latest JavaScript features
-- **Improved module resolution**: Changed from `node` to `bundler` for better modern bundling support
-- **Updated dependencies**: Updated @typescript-eslint packages to latest minor versions
+- **Improved module resolution**: Changed from `node` to `bundler` for better modern bundling
+  support
+- **Updated ESLint configuration**: Updated ecmaVersion from 2022 to 2023 to match TypeScript target
+- **Updated webpack ts-loader**: Configured explicit ES2023 target for consistent compilation
+- **Updated dependencies**: Updated @typescript-eslint packages to 8.53.1 and prettier to 3.8.1
 
 ### Fixed
 
