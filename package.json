@@ -24,11 +24,11 @@
     "validate-setup": "bash tools/validate-setup.sh"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.53.1",
     "chai": "6.2.2",
-    "chrome-types": "^0.1.423",
-    "eslint": "^10.0.3",
+    "chrome-types": "^0.1.425",
+    "eslint": "^10.1.0",
     "minimist": "1.2.8",
     "mocha": "11.7.5",
     "prettier": "^3.8.0",
