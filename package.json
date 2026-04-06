@@ -35,7 +35,7 @@
     "serialize-javascript": "7.0.5",
     "sinon": "^21.0.3",
     "sinon-chrome": "3.0.1",
-    "ts-loader": "9.5.4",
+    "ts-loader": "9.5.7",
     "typescript": "6.0.2",
     "webpack": "5.105.4",
     "webpack-cli": "7.0.2"
