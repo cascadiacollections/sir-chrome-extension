@@ -34,11 +34,11 @@
     "mocha": "11.7.5",
     "prettier": "^3.8.0",
     "serialize-javascript": "7.0.5",
-    "sinon": "^21.0.3",
+    "sinon": "^21.1.2",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.7",
     "typescript": "6.0.2",
-    "webpack": "5.105.4",
+    "webpack": "5.106.1",
     "webpack-cli": "7.0.2"
   },
   "keywords": [
