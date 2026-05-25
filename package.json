@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^8.59.4",
     "@typescript-eslint/parser": "^8.59.4",
     "chai": "6.2.2",
-    "chrome-types": "^0.1.428",
+    "chrome-types": "^0.1.429",
     "eslint": "^10.4.0",
     "minimist": "1.2.8",
     "mocha": "11.7.5",

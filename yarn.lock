@@ -635,10 +635,10 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.4.tgz"
   integrity sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==
 
-chrome-types@^0.1.428:
-  version "0.1.428"
-  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.428.tgz#1c50090d2189edc90ed45d1db552c9239e7b91fb"
-  integrity sha512-Z1rNOAu7v97Jfb5ekIesFFlOWV05oI+Oy+RUVkXs19l0nXhQLg/kh6kW71ao/TWhDoeHPhxeiEfQWWWQdIT6gA==
+chrome-types@^0.1.429:
+  version "0.1.429"
+  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.429.tgz#8960e95dd8846f48c1b6db5c8d3846ed25c154c0"
+  integrity sha512-+GZMwJQ4GEhrlZsEanDWnjbw9YDv0nZRxGyEEqDcjI1PvW8ucsKVn/5hmnmKv/j/hgL1pIbU6J1ixaNKRiNaGg==
 
 cliui@^8.0.1:
   version "8.0.1"
