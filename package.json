@@ -31,14 +31,14 @@
     "chrome-types": "^0.1.428",
     "eslint": "^10.4.0",
     "minimist": "1.2.8",
-    "mocha": "11.7.5",
+    "mocha": "11.7.6",
     "prettier": "^3.8.3",
     "serialize-javascript": "7.0.5",
     "sinon": "^22.0.0",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.5.7",
     "typescript": "6.0.3",
-    "webpack": "5.106.2",
+    "webpack": "5.107.2",
     "webpack-cli": "7.0.2"
   },
   "keywords": [
