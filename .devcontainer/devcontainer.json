@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
 {
   "name": "Node.js & TypeScript",
-  "image": "node:24-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
@@ -32,10 +32,14 @@
         "bradlc.vscode-tailwindcss",
         "ms-vscode.vscode-json",
         "github.copilot",
-        "github.copilot-chat"
+        "github.copilot-chat",
+        "github.vscode-pull-request-github"
       ],
       "settings": {
-        "typescript.preferences.importModuleSpecifier": "relative",
+        "js/ts.preferences.importModuleSpecifier": "relative",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode"
       }
