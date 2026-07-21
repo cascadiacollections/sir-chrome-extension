@@ -21,6 +21,11 @@ updates:
     open-pull-requests-limit: 5
     target-branch: "main"
     versioning-strategy: "increase"
+    ignore:
+      # TypeScript 7.x is the preview native port; ts-loader / typescript-eslint
+      # don't support it yet. Stay on the stable 5.x line.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
     groups:
       production-dependencies:
         patterns:
