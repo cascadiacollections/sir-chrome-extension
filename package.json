@@ -34,7 +34,7 @@
     "mocha": "11.7.6",
     "prettier": "^3.9.6",
     "serialize-javascript": "7.0.7",
-    "sinon": "^22.0.0",
+    "sinon": "^22.1.0",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.6.2",
     "typescript": "^5.9.3",
