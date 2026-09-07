@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.68.0",
-    "@typescript-eslint/parser": "^8.68.0",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
     "chai": "6.2.2",
-    "chrome-types": "^0.1.440",
+    "chrome-types": "^0.1.443",
     "eslint": "^10.9.1",
     "minimist": "1.2.8",
     "mocha": "11.8.0",
