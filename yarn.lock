@@ -603,10 +603,10 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.4.tgz"
   integrity sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==
 
-chrome-types@^0.1.445:
-  version "0.1.445"
-  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.445.tgz#e8b9cd23a6fda5a56ab066629fea9a4e5d6b8499"
-  integrity sha512-J7dQkYydHk2szYmc8TALncK6dNy6NXScxLvraNGUuR9JnboT5v5KEQL0SVHHuor0uxf0cls7eFGxF/WqMB0GtA==
+chrome-types@^0.1.447:
+  version "0.1.447"
+  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.447.tgz#897803bffcde6cbd2899ea276997435314347ddd"
+  integrity sha512-vnLekNSOKI2iah8spVZ+8TfYzg+I1YvANug3nAmQlMe32gzQXMPYZ0tUWldj8IyUanKN3nkf8BSxQSWQPkZDDg==
 
 clone-deep@^4.0.1:
   version "4.0.1"
@@ -1294,10 +1294,10 @@ prelude-ls@^1.2.1:
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^3.9.6:
-  version "3.9.6"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.9.6.tgz#b3ea5146515d40fc53f18aa63f74dfab1e10dbf6"
-  integrity sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==
+prettier@^3.9.8:
+  version "3.9.8"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.9.8.tgz#54e81128584538c81d85fce9d5fd77a410c385c5"
+  integrity sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==
 
 punycode@^2.1.0:
   version "2.3.1"
