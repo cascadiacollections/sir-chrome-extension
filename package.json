@@ -33,7 +33,7 @@
     "minimist": "1.2.8",
     "mocha": "12.0.3",
     "prettier": "^3.9.10",
-    "serialize-javascript": "7.1.2",
+    "serialize-javascript": "7.1.4",
     "sinon": "^22.1.0",
     "sinon-chrome": "3.0.1",
     "ts-loader": "9.6.2",
