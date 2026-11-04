@@ -49,6 +49,8 @@ updates:
           - "mocha"
           - "chai"
           - "sinon*"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -69,3 +71,8 @@ updates:
       include: "scope"
     open-pull-requests-limit: 3
     target-branch: "main"
+    groups:
+      github-actions:
+        patterns: ["*"]
+    cooldown:
+      default-days: 7
