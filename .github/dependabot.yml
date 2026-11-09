@@ -9,8 +9,6 @@ updates:
       timezone: "America/Los_Angeles"
     assignees:
       - "KevinTCoughlin"
-    reviewers:
-      - "KevinTCoughlin"
     labels:
       - "dependencies"
       - "npm"
@@ -27,28 +25,8 @@ updates:
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]
     groups:
-      production-dependencies:
-        patterns:
-          - "*"
-        exclude-patterns:
-          - "@types/*"
-          - "*-dev"
-          - "webpack*"
-          - "ts-loader"
-          - "typescript"
-          - "mocha"
-          - "chai"
-          - "sinon*"
-      development-dependencies:
-        patterns:
-          - "@types/*"
-          - "*-dev"
-          - "webpack*"
-          - "ts-loader"
-          - "typescript"
-          - "mocha"
-          - "chai"
-          - "sinon*"
+      npm:
+        patterns: ["*"]
     cooldown:
       default-days: 7
 
@@ -60,8 +38,6 @@ updates:
       time: "03:00"
       timezone: "America/Los_Angeles"
     assignees:
-      - "KevinTCoughlin"
-    reviewers:
       - "KevinTCoughlin"
     labels:
       - "dependencies"
