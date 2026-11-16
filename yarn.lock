@@ -608,10 +608,10 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.npmjs.org/chrome-trace-event/-/chrome-trace-event-1.0.4.tgz"
   integrity sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==
 
-chrome-types@^0.1.461:
-  version "0.1.461"
-  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.461.tgz#38671273a22afb34beb4250eebc0fcb1978159f0"
-  integrity sha512-y87EooY8Fi9ZmYAogbNbS1OlL4Og1ag0H9kHCu+waL9N84WxqCpYaIIpxKuTwqs6ScNmU3UqJXtex9836rSgxQ==
+chrome-types@^0.1.463:
+  version "0.1.463"
+  resolved "https://registry.yarnpkg.com/chrome-types/-/chrome-types-0.1.463.tgz#86b12e18c9fec54f45b30955a99705482f08e9cf"
+  integrity sha512-Whhl9dsjYjL+qgsD3IpqpcRPZQ08PuWKBy8RmEAePCB8zvc8gxuOuNt9lWF0N0SQz4ePsAZgu055pc6bCaDesg==
 
 clone-deep@^4.0.1:
   version "4.0.1"
