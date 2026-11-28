@@ -1,219 +1,197 @@
 /// <reference types="chrome-types" />
 
-interface RadioConfig {
-  readonly url: string;
-  readonly maxRetries: number;
-  readonly retryDelay: number;
+import { DomAudioPlayer } from './audio-engine';
+import { badgeFor, type PlaybackSnapshot } from './badge';
+import { ShoutKitController, type Player } from './controller';
+import { DIRECTORY_UNAVAILABLE, RadioBrowserClient } from './radio-browser';
+import { OffscreenPlayer } from './offscreen-player';
+import type { ExtensionPush, ExtensionResponse } from './protocol';
+import { sanitizeStationList } from './favorites';
+import { stationFromUnknown, type Station } from './stations';
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
 }
 
-interface PlaybackState {
-  isPlaying: boolean;
-  isLoading: boolean;
-  hasError: boolean;
-  retryCount: number;
+function createPlayer(): Player {
+  if (typeof Audio === 'function') {
+    return new DomAudioPlayer();
+  }
+  return new OffscreenPlayer();
 }
 
-class MediaPlayer {
-  readonly #audio = new Audio();
-  readonly #config: RadioConfig;
-  #state: PlaybackState = {
-    isPlaying: false,
-    isLoading: false,
-    hasError: false,
-    retryCount: 0,
-  };
-
-  constructor(config: RadioConfig) {
-    this.#config = config;
-    this.#setupAudioEvents();
-    this.#setupChromeEvents();
-    this.#updateBadge();
-    this.#updateTitle();
-  }
-
-  #setupAudioEvents(): void {
-    this.#audio.addEventListener('loadstart', () => {
-      this.#setState({ isLoading: true, hasError: false });
-      this.#updateBadge();
-    });
-
-    this.#audio.addEventListener('canplay', () => {
-      this.#setState({ isLoading: false });
-      this.#updateBadge();
-    });
-
-    this.#audio.addEventListener('play', () => {
-      this.#setState({ isPlaying: true, retryCount: 0 });
-      this.#updateBadge();
-      this.#updateTitle();
-    });
-
-    this.#audio.addEventListener('pause', () => {
-      this.#setState({ isPlaying: false });
-      this.#updateBadge();
-      this.#updateTitle();
-    });
-
-    this.#audio.addEventListener('error', event => {
-      // eslint-disable-next-line no-console
-      console.error('Audio error:', event);
-      this.#setState({ hasError: true, isLoading: false, isPlaying: false });
-      this.#updateBadge();
-      this.#handlePlaybackError();
-    });
-
-    this.#audio.addEventListener('ended', () => {
-      // Stream shouldn't end normally, try to reconnect
-      this.#handlePlaybackError();
-    });
-  }
-
-  #setupChromeEvents(): void {
-    chrome.action.onClicked.addListener(() => this.#toggle());
-
-    // Handle extension installation/update
-    chrome.runtime.onInstalled.addListener(details => {
-      if (details.reason === 'install') {
-        // eslint-disable-next-line no-console
-        console.log('S.I.R Extension installed');
-      } else if (details.reason === 'update') {
-        // eslint-disable-next-line no-console
-        console.log(
-          'S.I.R Extension updated to version',
-          chrome.runtime.getManifest()['version']
-        );
-      }
-    });
-  }
-
-  #setState(updates: Partial<PlaybackState>): void {
-    this.#state = { ...this.#state, ...updates };
-  }
-
-  #getBadgeText(): string {
-    if (this.#state.isLoading) {
-      return '...';
-    }
-    if (this.#state.hasError) {
-      return 'ERR';
-    }
-    return this.#state.isPlaying ? 'ON' : 'OFF';
-  }
-
-  #getBadgeColor(): string {
-    if (this.#state.hasError) {
-      return '#FF0000';
-    }
-    if (this.#state.isLoading) {
-      return '#FFA500';
-    }
-    return this.#state.isPlaying ? '#00FF00' : '#808080';
-  }
-
-  #updateBadge(): void {
-    const text = this.#getBadgeText();
-    const color = this.#getBadgeColor();
-
-    chrome.action.setBadgeText({ text });
-    chrome.action.setBadgeBackgroundColor({ color });
-  }
-
-  #updateTitle(): void {
-    const title = this.#state.isPlaying
-      ? 'S.I.R - Playing'
-      : 'S.I.R - Click to Play';
-    chrome.action.setTitle({ title });
-  }
-
-  #toggle(): void {
-    if (this.#state.isPlaying) {
-      this.#stop();
-    } else {
-      this.#play().catch((error: Error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to start playback:', error);
+function chromeLibrary(): {
+  load: () => Promise<{ favorites: Station[]; lastStation: Station | null }>;
+  save: (library: {
+    favorites: Station[];
+    lastStation: Station | null;
+  }) => Promise<void>;
+} {
+  return {
+    async load(): Promise<{
+      favorites: Station[];
+      lastStation: Station | null;
+    }> {
+      const stored = (await chrome.storage.local.get([
+        'favorites',
+        'lastStation',
+      ])) as Record<string, unknown>;
+      return {
+        favorites: sanitizeStationList(stored['favorites']),
+        lastStation: stationFromUnknown(stored['lastStation']),
+      };
+    },
+    async save(library: {
+      favorites: Station[];
+      lastStation: Station | null;
+    }): Promise<void> {
+      await chrome.storage.local.set({
+        favorites: library.favorites,
+        lastStation: library.lastStation,
       });
-    }
-  }
+    },
+  };
+}
 
-  #stop(): void {
-    this.#audio.pause();
-    this.#audio.src = '';
-    this.#setState({ isPlaying: false, isLoading: false, hasError: false });
-    this.#updateBadge();
-    this.#updateTitle();
-  }
+function applyBadge(snapshot: PlaybackSnapshot): void {
+  const badge = badgeFor(snapshot);
+  void chrome.action.setBadgeText({ text: badge.text });
+  void chrome.action.setBadgeBackgroundColor({ color: badge.color });
+  void chrome.action.setTitle({ title: badge.title });
+}
 
-  async #play(): Promise<void> {
-    try {
-      this.#setState({ isLoading: true, hasError: false });
-      this.#updateBadge();
+function responseFrom(
+  snapshot: PlaybackSnapshot,
+  favorites: Station[],
+  stations: Station[] = [],
+  listed = false,
+  error = ''
+): ExtensionResponse {
+  return {
+    ok: error === '',
+    error,
+    snapshot,
+    favorites,
+    stations,
+    listed,
+  };
+}
 
-      this.#audio.src = this.#config.url;
-      this.#audio.load();
+function startBackground(): void {
+  const controller = new ShoutKitController({
+    directory: new RadioBrowserClient(),
+    player: createPlayer(),
+    store: chromeLibrary(),
+    onChange: (snapshot): void => {
+      applyBadge(snapshot);
+      const push: ExtensionPush = {
+        target: 'popup',
+        type: 'state',
+        snapshot,
+        favorites: controller.favorites(),
+      };
+      void chrome.runtime.sendMessage(push).catch(() => undefined);
+    },
+  });
 
-      await this.#audio.play();
-      // eslint-disable-next-line no-console
-      console.log('S.I.R playback started successfully');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('S.I.R playback failed:', error);
-      this.#setState({ hasError: true, isLoading: false });
-      this.#updateBadge();
-      throw error;
-    }
-  }
-
-  async #handlePlaybackError(): Promise<void> {
-    if (this.#state.retryCount >= this.#config.maxRetries) {
-      // eslint-disable-next-line no-console
-      console.error('Max retries reached, giving up');
-      this.#setState({ hasError: true });
-      this.#updateBadge();
-      return;
-    }
-
-    this.#setState({ retryCount: this.#state.retryCount + 1 });
-    // eslint-disable-next-line no-console
-    console.log(
-      `Attempting to reconnect (${this.#state.retryCount}/${
-        this.#config.maxRetries
-      })`
+  const reply = (
+    stations: Station[] = [],
+    listed = false,
+    error = ''
+  ): ExtensionResponse =>
+    responseFrom(
+      controller.snapshot(),
+      controller.favorites(),
+      stations,
+      listed,
+      error
     );
 
-    await new Promise(resolve => {
-      setTimeout(resolve, this.#config.retryDelay);
-    });
-
+  const dispatch = async (
+    message: Record<string, unknown>
+  ): Promise<ExtensionResponse> => {
+    const type = message['type'];
     try {
-      await this.#play();
+      if (type === 'snapshot') {
+        return reply();
+      }
+      if (type === 'search') {
+        const query =
+          typeof message['query'] === 'string' ? message['query'] : '';
+        const stations = query.trim()
+          ? await controller.search(query)
+          : await controller.topStations();
+        return reply(stations, true);
+      }
+      if (type === 'top') {
+        return reply(await controller.topStations(), true);
+      }
+      if (type === 'tag') {
+        const tag = typeof message['tag'] === 'string' ? message['tag'] : '';
+        return reply(await controller.stationsByTag(tag), true);
+      }
+      if (type === 'play') {
+        const station = stationFromUnknown(message['station']);
+        if (!station) {
+          return reply([], false, 'That station has no playable stream.');
+        }
+        await controller.play(station);
+        return reply();
+      }
+      if (type === 'stop') {
+        await controller.stop();
+        return reply();
+      }
+      if (type === 'toggle') {
+        await controller.toggle();
+        return reply();
+      }
+      if (type === 'toggle-favorite') {
+        const station = stationFromUnknown(message['station']);
+        if (station) {
+          await controller.toggleFavorite(station);
+        }
+        return reply();
+      }
+      if (type === 'metadata-enabled') {
+        controller.refreshMetadata();
+        return reply();
+      }
+      return reply([], false, 'Unknown request.');
     } catch (error) {
+      // Kept: a failed directory call is otherwise invisible in the service worker.
       // eslint-disable-next-line no-console
-      console.error('Retry failed:', error);
-      // Will trigger another retry if under max retries
-      setTimeout(() => {
-        this.#handlePlaybackError();
-      }, this.#config.retryDelay);
+      console.error('ShoutKit request failed', error);
+      return reply([], false, DIRECTORY_UNAVAILABLE);
     }
-  }
+  };
 
-  // Public methods for potential future API
-  public getState(): Readonly<PlaybackState> {
-    return { ...this.#state };
-  }
+  chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+    if (!isRecord(message) || message['target'] !== 'controller') {
+      return undefined;
+    }
+    void dispatch(message)
+      .then(sendResponse)
+      .catch(() => {
+        sendResponse(reply([], false, DIRECTORY_UNAVAILABLE));
+      });
+    return true;
+  });
 
-  public isPlaying(): boolean {
-    return this.#state.isPlaying;
-  }
+  chrome.commands.onCommand.addListener(command => {
+    if (command !== 'toggle-playback') {
+      return;
+    }
+    void controller.toggle().then(() => {
+      if (!controller.snapshot().station && chrome.action.openPopup) {
+        void chrome.action.openPopup().catch(() => undefined);
+      }
+    });
+  });
+
+  void controller.start().catch(() => {
+    applyBadge(controller.snapshot());
+  });
 }
 
-const RADIO_CONFIG: RadioConfig = {
-  url: 'https://broadcast.shoutcheap.com/proxy/willradio/stream',
-  maxRetries: 3,
-  retryDelay: 2000,
-};
-
-// Initialize the media player
-const mediaPlayer = new MediaPlayer(RADIO_CONFIG);
-
-export default mediaPlayer;
+startBackground();

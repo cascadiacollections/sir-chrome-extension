@@ -1,6 +1,6 @@
-# Contributing to S.I.R Chrome Extension
+# Contributing to the ShoutKit extension
 
-Thank you for your interest in contributing to the S.I.R Chrome Extension! This document provides
+Thank you for contributing to the ShoutKit browser extension. This document provides
 guidelines and information for contributors.
 
 ## Development Setup
@@ -18,8 +18,8 @@ guidelines and information for contributors.
 1. Fork the repository on GitHub
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/sir-chrome-extension.git
-   cd sir-chrome-extension
+   git clone https://github.com/YOUR_USERNAME/shoutkit-browser-extension.git
+   cd shoutkit-browser-extension
    ```
 3. Install dependencies:
    ```bash
@@ -206,4 +206,4 @@ If you have questions about contributing:
 - Help others learn and contribute
 - Follow the project's coding standards
 
-Thank you for contributing to the S.I.R Chrome Extension!
+Thank you for contributing to the ShoutKit extension!

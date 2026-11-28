@@ -53,11 +53,13 @@ jobs:
 
       - name: Verify manifest
         run: |
-          if [ ! -f "app/dist/background.js" ]; then
-            echo "Build failed: background.js not found"
-            exit 1
-          fi
-          echo "Build successful: background.js created"
+          for file in app/dist/background.js app/dist/offscreen.js app/dist/popup.js app/manifest.json app/offscreen.html app/popup.html app/rules.json; do
+            if [ ! -f "$file" ]; then
+              echo "Build failed: $file not found"
+              exit 1
+            fi
+          done
+          echo "Build successful: background, offscreen, and popup bundles created"
 
       - name: Upload build artifacts
         if: matrix.node-version == '24.x'
@@ -118,12 +120,12 @@ jobs:
       - name: Create extension package
         run: |
           cd app
-          zip -r ../sir-chrome-extension-${{ github.sha }}.zip . \
-            -x "*.ts" "*.map" "scripts/*.ts"
+          zip -r ../shoutkit-${{ github.sha }}.zip . \
+            -x "*.ts" "*.map" "scripts/*.ts" "manifest.firefox.json"
 
       - name: Upload extension package
         uses: actions/upload-artifact@v7
         with:
-          name: sir-chrome-extension-package
-          path: sir-chrome-extension-${{ github.sha }}.zip
+          name: shoutkit-package
+          path: shoutkit-${{ github.sha }}.zip
           retention-days: 90

@@ -1,6 +1,7 @@
 # Changelog
 
-All notable changes to the S.I.R Chrome Extension will be documented in this file.
+All notable changes to the ShoutKit browser extension (formerly the S.I.R Chrome extension) are
+documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,6 +9,44 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 ### Changed
+
+- The extension is now ShoutKit, a Radio Browser client, instead of a one-station player for
+  SModcast Internet Radio. Manifest and package version are **2.0.0**. No git tag or Web Store
+  publish is part of this change.
+- Playback uses a Manifest V3 offscreen document on Chromium so audio continues after the toolbar
+  popup closes. `app/manifest.firefox.json` is a Firefox variant whose background page plays audio
+  directly and does not request the Chromium-only `offscreen` permission.
+- Favorites and the last station are stored in `chrome.storage.local`. Nothing plays on install.
+- Stream reconnects are unchanged in spirit: three retries after the first failure, now waiting 2s,
+  4s, and 8s. A reconnect does not send another Radio Browser play report.
+- The toolbar badge still uses `OFF`, `...`, `ON`, and `ERR`. The colors are darkened so the white
+  badge text stays readable.
+- Icons are the ShoutKit mark, resized from `site/assets/app-icon-256.png` in
+  `cascadiacollections/shoutkit`. Popup colors follow that app's blue accent and coral highlight
+  (`ShoutKitTheme.swift`). The Android module still comments an older amber "SIR" palette; this UI
+  follows the iOS theme.
+
+### Removed
+
+- The hard-coded S.I.R stream is not the default and is not an optional preset. Checked
+  **2026-11-28**:
+  - `GET https://broadcast.shoutcheap.com/proxy/willradio/stream` (the URL v1.4.3 played) returned
+    **HTTP 502 Bad Gateway**, `Server: cc-web/1.6.3`, `Content-Type: text/html`, `Content-Length:
+    117`, body `Sorry, an error occurred while attempting to load the requested page.` The same 502
+    was returned for `/proxy/willradio`, `/proxy/willradio/`, the `http://` URL, and with
+    `Icy-MetaData: 1`. DNS for `broadcast.shoutcheap.com` resolved (`209.133.221.250`); `GET /` on
+    that host returned 200 and redirected to a login page. The station proxy is what failed.
+  - `https://www.smodcast.com/sir` still links to
+    `https://cp12.shoutcheap.com:2199/tunein/willradio.pls`. Requesting the `http://` playlist
+    returned **302** to that HTTPS URL. The certificate is `CN=radio.shoutcheap.com` with SAN
+    `DNS:radio.shoutcheap.com` only, so the hostname does not match. With verification disabled the
+    body was `Unable to access account for willradio: Invalid username or password`.
+  - `GET https://all.api.radio-browser.info/json/stations/search?name=smodcast&hidebroken=false&limit=5`
+    returned `[]`.
+- A preset of either URL would only surface an error, including if someone tapped it "in case it
+  returns." If S.I.R comes back, add a curated station or let Radio Browser list it.
+
+### Changed (earlier unreleased maintenance)
 
 - **Modernized Chrome type definitions**: Migrated from deprecated `@types/chrome` (0.1.34) to
   official Google-maintained `chrome-types` (0.1.414)

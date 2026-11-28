@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "S.I.R - SModcast Internet Radio",
+    "message": "ShoutKit",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Unofficial Chrome Extension for listening to Kevin Smith's SModcast Internet Radio, S.I.R.",
+    "message": "Search and play internet radio from Radio Browser. No accounts, no tracking.",
     "description": "The description of the application"
   }
 }

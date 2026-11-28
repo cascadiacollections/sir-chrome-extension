@@ -9,11 +9,15 @@ module.exports = (env, argv) => {
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     entry: {
       background: './app/scripts/background.ts',
+      offscreen: './app/scripts/offscreen.ts',
+      popup: './app/scripts/popup.ts',
     },
     output: {
       path: path.resolve(__dirname, 'app/dist'),
       filename: '[name].js',
       clean: true,
+      // Service workers have no `window`. Popup and offscreen documents do.
+      globalObject: 'globalThis',
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -29,6 +33,8 @@ module.exports = (env, argv) => {
               compilerOptions: {
                 module: 'esnext',
                 target: 'es2023',
+                declaration: false,
+                declarationMap: false,
               },
             },
           },

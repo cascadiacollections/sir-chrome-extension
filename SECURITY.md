@@ -1,20 +1,17 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-Use this section to tell people about which versions of your project are currently being supported
-with security updates.
+Security fixes go to the current `main` branch. The 1.x S.I.R-only extension is no longer the
+product.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Reporting a vulnerability
 
-## Reporting a Vulnerability
+Please use
+[GitHub private vulnerability reporting](https://github.com/cascadiacollections/shoutkit-browser-extension/security/advisories/new)
+for this repository. Do not open a public issue for an unfixed vulnerability.
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a reported vulnerability, what
-to expect if the vulnerability is accepted or declined, etc.
+What the extension is allowed to do is intentionally small: Radio Browser directory requests,
+playback of a station the user chose, optional ICY title reads after the user grants host access,
+and favorites stored locally. A report that shows data leaving the browser beyond that, or a stream
+URL being accepted from somewhere other than `http:` / `https:`, is in scope.

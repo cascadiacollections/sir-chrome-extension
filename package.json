@@ -1,7 +1,7 @@
 {
-  "name": "sir-smodcast-internet-radio",
-  "version": "1.4.3",
-  "description": "Unofficial Chrome Extension for listening to Kevin Smith's SModcast Internet Radio, S.I.R.",
+  "name": "shoutkit",
+  "version": "2.0.0",
+  "description": "ShoutKit browser extension: search and play internet radio from Radio Browser. No accounts, no tracking.",
   "engines": {
     "node": ">=24.0.0",
     "npm": ">=10.0.0"
@@ -10,8 +10,8 @@
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development",
     "build:watch": "webpack --mode=development --watch",
-    "test": "mocha test/**/*.mjs",
-    "test:watch": "mocha test/**/*.mjs --watch",
+    "test": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./test/register.mjs\" mocha test/**/*.mjs",
+    "test:watch": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./test/register.mjs\" mocha test/**/*.mjs --watch",
     "lint": "eslint app/**/*.ts",
     "lint:fix": "eslint app/**/*.ts --fix",
     "type-check": "tsc --noEmit",
@@ -19,7 +19,7 @@
     "format": "prettier --write \"**/*.{js,ts,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,ts,json,md}\"",
     "pre-commit": "npm run format && npm run lint && npm run type-check && npm test",
-    "package": "npm run build && npm run test && cd app && zip -r ../extension.zip . -x '*.ts' '*.map' 'scripts/*.ts'",
+    "package": "npm run build && npm run test && cd app && zip -r ../shoutkit.zip . -x '*.ts' '*.map' 'scripts/*.ts' 'manifest.firefox.json'",
     "dev": "npm run build:dev && npm run type-check",
     "validate-setup": "bash tools/validate-setup.sh"
   },
@@ -51,19 +51,19 @@
   },
   "keywords": [
     "chrome-extension",
-    "smodcast",
-    "radio",
-    "kevin-smith",
-    "sir"
+    "firefox-extension",
+    "shoutkit",
+    "internet-radio",
+    "radio-browser"
   ],
   "author": "Kevin Coughlin",
   "license": "MIT",
-  "homepage": "https://kevintcoughlin.com/",
+  "homepage": "https://github.com/cascadiacollections/shoutkit-browser-extension",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cascadiacollections/sir-chrome-extension.git"
+    "url": "https://github.com/cascadiacollections/shoutkit-browser-extension.git"
   },
   "bugs": {
-    "url": "https://github.com/cascadiacollections/sir-chrome-extension/issues"
+    "url": "https://github.com/cascadiacollections/shoutkit-browser-extension/issues"
   }
 }

@@ -1,0 +1,55 @@
+{
+  "name": "__MSG_appName__",
+  "short_name": "ShoutKit",
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "description": "__MSG_appDescription__",
+  "author": "Kevin Coughlin",
+  "homepage_url": "https://github.com/cascadiacollections/shoutkit-browser-extension",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": ["dist/background.js"]
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png"
+    },
+    "default_title": "ShoutKit"
+  },
+  "commands": {
+    "toggle-playback": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Command+Shift+9"
+      },
+      "description": "Play or stop the current station"
+    }
+  },
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["https://*.api.radio-browser.info/*"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "user_agent",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "shoutkit@cascadiacollections.github.io",
+      "strict_min_version": "128.0"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 #!/bin/bash
-# Setup validation script for S.I.R Chrome Extension
+# Setup validation script for the ShoutKit extension
 
 set -e
 
-echo "🔍 S.I.R Chrome Extension - Setup Validation"
+echo "🔍 ShoutKit extension - Setup Validation"
 echo "=============================================="
 echo ""
 
@@ -78,12 +78,13 @@ fi
 
 # Check if build output exists
 echo "✓ Verifying build output..."
-if [ -f "app/dist/background.js" ]; then
-  echo "  ✅ Build artifacts present"
-else
-  echo "  ❌ Build artifacts missing"
-  exit 1
-fi
+for artifact in app/dist/background.js app/dist/offscreen.js app/dist/popup.js; do
+  if [ ! -f "$artifact" ]; then
+    echo "  ❌ Build artifact missing: $artifact"
+    exit 1
+  fi
+done
+echo "  ✅ Build artifacts present"
 
 echo ""
 echo "=============================================="
