@@ -18,8 +18,8 @@ guidelines and information for contributors.
 1. Fork the repository on GitHub
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/sir-chrome-extension.git
-   cd sir-chrome-extension
+   git clone https://github.com/YOUR_USERNAME/shoutkit-browser-extension.git
+   cd shoutkit-browser-extension
    ```
 3. Install dependencies:
    ```bash

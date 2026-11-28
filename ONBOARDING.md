@@ -45,8 +45,8 @@ The fastest way to get started (choose one option):
 
 ```bash
 # Clone the repository
-git clone https://github.com/cascadiacollections/sir-chrome-extension.git
-cd sir-chrome-extension
+git clone https://github.com/cascadiacollections/shoutkit-browser-extension.git
+cd shoutkit-browser-extension
 
 # Install dependencies
 npm install
@@ -102,8 +102,8 @@ The project includes an `.editorconfig` file for consistent formatting across al
 
 ```bash
 # Fork the repository on GitHub first, then:
-git clone https://github.com/YOUR_USERNAME/sir-chrome-extension.git
-cd sir-chrome-extension
+git clone https://github.com/YOUR_USERNAME/shoutkit-browser-extension.git
+cd shoutkit-browser-extension
 ```
 
 ### 2. Install Dependencies
@@ -215,7 +215,7 @@ npm run test:watch
 
 1. **Find an issue to work on:**
    - Look for issues labeled `good first issue`
-   - Check the [issue tracker](https://github.com/cascadiacollections/sir-chrome-extension/issues)
+   - Check the [issue tracker](https://github.com/cascadiacollections/shoutkit-browser-extension/issues)
 
 2. **Create a feature branch:**
    ```bash
@@ -278,7 +278,7 @@ npm test
 ### Resources
 
 - **Documentation:** Check the docs in this repository
-- **GitHub Issues:** [Open an issue](https://github.com/cascadiacollections/sir-chrome-extension/issues) for bugs or questions
+- **GitHub Issues:** [Open an issue](https://github.com/cascadiacollections/shoutkit-browser-extension/issues) for bugs or questions
 - **GitHub Discussions:** Ask questions and share ideas
 - **Code Review:** All PRs receive detailed feedback
 

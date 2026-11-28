@@ -58,12 +58,12 @@
   ],
   "author": "Kevin Coughlin",
   "license": "MIT",
-  "homepage": "https://github.com/cascadiacollections/sir-chrome-extension",
+  "homepage": "https://github.com/cascadiacollections/shoutkit-browser-extension",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cascadiacollections/sir-chrome-extension.git"
+    "url": "https://github.com/cascadiacollections/shoutkit-browser-extension.git"
   },
   "bugs": {
-    "url": "https://github.com/cascadiacollections/sir-chrome-extension/issues"
+    "url": "https://github.com/cascadiacollections/shoutkit-browser-extension/issues"
   }
 }

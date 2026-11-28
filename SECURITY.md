@@ -8,7 +8,7 @@ product.
 ## Reporting a vulnerability
 
 Please use
-[GitHub private vulnerability reporting](https://github.com/cascadiacollections/sir-chrome-extension/security/advisories/new)
+[GitHub private vulnerability reporting](https://github.com/cascadiacollections/shoutkit-browser-extension/security/advisories/new)
 for this repository. Do not open a public issue for an unfixed vulnerability.
 
 What the extension is allowed to do is intentionally small: Radio Browser directory requests,

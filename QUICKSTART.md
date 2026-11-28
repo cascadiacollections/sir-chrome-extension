@@ -6,8 +6,8 @@ The old one-station S.I.R stream is not built in. See the README for why.
 ## First time
 
 ```bash
-git clone https://github.com/cascadiacollections/sir-chrome-extension.git
-cd sir-chrome-extension
+git clone https://github.com/cascadiacollections/shoutkit-browser-extension.git
+cd shoutkit-browser-extension
 npm install
 npm test
 npm run build
@@ -43,4 +43,4 @@ Playback continues after the popup closes. The badge reads `OFF`, `...`, `ON`, o
 - [Onboarding](ONBOARDING.md)
 - [Development](DEVELOPMENT.md)
 - [Contributing](CONTRIBUTING.md)
-- [Issues](https://github.com/cascadiacollections/sir-chrome-extension/issues)
+- [Issues](https://github.com/cascadiacollections/shoutkit-browser-extension/issues)

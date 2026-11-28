@@ -12,11 +12,10 @@ station.
 > **Quick links**: [Quickstart](QUICKSTART.md) · [Development](DEVELOPMENT.md) ·
 > [Contributing](CONTRIBUTING.md)
 
-[![CI](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml)
+[![CI](https://github.com/cascadiacollections/shoutkit-browser-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/shoutkit-browser-extension/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-ShoutKit on other platforms:
-[iOS and Apple TV](https://github.com/cascadiacollections/shoutkit) ·
+ShoutKit on other platforms: [iOS and Apple TV](https://github.com/cascadiacollections/shoutkit) ·
 [Android](https://github.com/cascadiacollections/shoutkit-android)
 
 ## Features
@@ -38,8 +37,8 @@ apps use a platform player that does.
 Chrome, Edge, and other Chromium browsers:
 
 ```bash
-git clone https://github.com/cascadiacollections/sir-chrome-extension.git
-cd sir-chrome-extension
+git clone https://github.com/cascadiacollections/shoutkit-browser-extension.git
+cd shoutkit-browser-extension
 npm install
 npm run build
 ```
@@ -56,13 +55,13 @@ service worker. Chrome and Edge should keep `app/manifest.json`.
 
 ## Permissions
 
-| Permission                                        | Why                                                                                         |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `storage`                                         | Favorites and the last station, on this browser only                                       |
-| `offscreen`                                       | Chrome MV3 service workers cannot play audio. Required on Chromium, omitted for Firefox    |
-| `declarativeNetRequest`                           | Sets the User-Agent Radio Browser asks clients to send. Limited to `api.radio-browser.info` |
-| `https://*.api.radio-browser.info/*`              | Station search, mirror discovery, and play reports                                          |
-| optional `http://*/*` and `https://*/*`           | Only if you turn on song titles, so the extension can read ICY metadata from that station   |
+| Permission                              | Why                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `storage`                               | Favorites and the last station, on this browser only                                        |
+| `offscreen`                             | Chrome MV3 service workers cannot play audio. Required on Chromium, omitted for Firefox     |
+| `declarativeNetRequest`                 | Sets the User-Agent Radio Browser asks clients to send. Limited to `api.radio-browser.info` |
+| `https://*.api.radio-browser.info/*`    | Station search, mirror discovery, and play reports                                          |
+| optional `http://*/*` and `https://*/*` | Only if you turn on song titles, so the extension can read ICY metadata from that station   |
 
 Song titles are off until you click **Enable song titles**. Chrome will describe that as access to
 the sites you play. The audio itself plays without it. Declining the prompt does not stop playback.
@@ -77,7 +76,8 @@ guidance as far as a browser can:
    built-in list is used, and `all.api.radio-browser.info` stays last so a healthy mirror can still
    be reached.
 2. Spread later requests across the mirrors and fail over (at most three tries, 350ms then 700ms).
-3. Send `User-Agent: ShoutKit-Extension/<version> (+https://github.com/cascadiacollections/sir-chrome-extension)`.
+3. Send
+   `User-Agent: ShoutKit-Extension/<version> (+https://github.com/cascadiacollections/shoutkit-browser-extension)`.
 4. When you press play on a Radio Browser station, call `/json/url/{stationuuid}` once. That counts
    the play and returns a fresh stream URL. Automatic reconnects do not count another play.
 
@@ -91,8 +91,8 @@ Checked on 28 November 2026. The stream this extension used to play,
 not. The playlist still linked from `https://www.smodcast.com/sir`
 (`https://cp12.shoutcheap.com:2199/tunein/willradio.pls`) presents a certificate for
 `radio.shoutcheap.com` only, and the account response is
-`Unable to access account for willradio: Invalid username or password`. Radio Browser has no
-station named SModcast.
+`Unable to access account for willradio: Invalid username or password`. Radio Browser has no station
+named SModcast.
 
 A preset that only errors is not useful, so S.I.R is not selectable and is not the default. The
 probe details are in the changelog. If the station comes back, it can be added as a curated station
@@ -142,16 +142,15 @@ Favorites stay in `chrome.storage.local`.
 MIT. See [LICENSE](LICENSE).
 
 The ShoutKit iOS and Android **apps** are GPL-3.0. Their reusable packages are MIT. This extension
-does not copy those app targets; it is new browser code written against the public Radio Browser
-and ICY formats. It stays MIT. Whether it should instead use GPL-3.0, so distributed forks stay
-open the way the apps do, is an open decision and is not made silently here.
+stays MIT: it is new browser code written against the public Radio Browser and ICY formats, not a
+copy of those GPL app targets.
 
 The ShoutKit name and the toolbar icon (resized from the iOS repo's `site/assets/app-icon-256.png`)
 are the family's branding. The iOS repo's `TRADEMARK.md` says that branding is not part of the code
 license.
 
-## Repository name
+## Repository
 
-The GitHub repository is still `cascadiacollections/sir-chrome-extension`. Renaming it, and updating
-[KevinTCoughlin/sir-extension-www](https://github.com/KevinTCoughlin/sir-extension-www) which links
-here, are follow-ups. This tree does not publish a release or a Web Store listing.
+Source:
+[cascadiacollections/shoutkit-browser-extension](https://github.com/cascadiacollections/shoutkit-browser-extension)
+(being renamed from `sir-chrome-extension`). This tree does not publish a release or a Web Store listing.
