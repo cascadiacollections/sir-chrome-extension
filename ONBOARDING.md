@@ -1,6 +1,8 @@
-# Onboarding Guide for S.I.R Chrome Extension
+# Onboarding guide for the ShoutKit extension
 
-Welcome to the S.I.R Chrome Extension project! This guide will help you get up and running quickly.
+Welcome. This repository is the ShoutKit browser extension: search Radio Browser, play a station in
+the background, and save favorites. It used to play only SModcast Internet Radio; that stream is
+not part of the extension anymore.
 
 ## Table of Contents
 
@@ -130,15 +132,17 @@ This compiles TypeScript to JavaScript and outputs to `app/dist/`.
 2. Enable "Developer mode" (toggle in top-right corner)
 3. Click "Load unpacked"
 4. Select the `app` folder from this project
-5. The S.I.R extension icon should appear in your toolbar
+5. The ShoutKit icon should appear in the toolbar
 
-### 5. Verify Installation
+### 5. Verify installation
 
-Click the extension icon to test:
-- It should show as "OFF" initially
-- Clicking should start the radio stream
-- Badge should turn green and show "ON"
-- Audio should play (if stream is available)
+Open the popup:
+
+- The badge starts as `OFF`. Nothing plays until you choose a station.
+- Popular stations load from Radio Browser.
+- Play one. The badge shows `...`, then `ON`, and audio continues after you close the popup.
+- Stop returns the badge to `OFF`.
+- The heart saves the station in this browser.
 
 ## Verify Your Setup
 
@@ -240,7 +244,7 @@ npm run test:watch
 #### Manual Debugging
 
 1. Right-click the extension icon → "Inspect popup"
-2. Or go to `chrome://extensions/` → Find S.I.R → Click "Inspect views: background page"
+2. Or go to `chrome://extensions/` → ShoutKit → service worker
 3. Use Chrome DevTools to debug
 
 #### Common Issues
@@ -314,6 +318,6 @@ npm run package         # Build and create .zip
 
 ## Welcome!
 
-Thank you for joining the S.I.R Chrome Extension project! We're excited to have you here. Don't hesitate to ask questions and contribute. Every contribution, no matter how small, is valued and appreciated.
+Thank you for joining the ShoutKit extension project.
 
 Happy coding! 🎵

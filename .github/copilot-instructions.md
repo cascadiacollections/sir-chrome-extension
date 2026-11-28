@@ -1,218 +1,51 @@
-# GitHub Copilot Instructions for S.I.R Chrome Extension
+# GitHub Copilot instructions for the ShoutKit extension
 
-## Project Overview
+## Project
 
-This is a Chrome extension for SModcast Internet Radio (S.I.R) that provides streaming audio
-functionality with a background service worker. The extension uses TypeScript, modern build tools,
-and follows Chrome Manifest V3 standards.
+Manifest V3 browser extension for ShoutKit. Users search
+[Radio Browser](https://www.radio-browser.info/) and play a station in the background. There is no
+hard-coded default stream. SModcast Internet Radio (S.I.R) is not a preset: its old URLs were dead
+as of 2026-11-28 (see `CHANGELOG.md`).
 
-## Development Guidelines
+Chrome and Edge use `app/manifest.json` (service worker + offscreen document). Firefox uses
+`app/manifest.firefox.json` (background script, no `offscreen` permission) because that background
+page can construct `Audio`.
 
-### TypeScript Standards
+## Layout
 
-- Use strict TypeScript configuration with explicit return types
-- Prefer private class fields (`#field`) for encapsulation
-- Use interfaces for type definitions (`RadioConfig`, `PlaybackState`)
-- Avoid `any` type - use proper typing
-- Use `const` over `let`, never use `var`
+- `app/scripts/radio-browser.ts` — mirror discovery, failover, play reports. Do not hard-code a
+  single Radio Browser host. Send `USER_AGENT` from `version.ts`. Report `/json/url/{uuid}` only on
+  a user-initiated play.
+- `app/scripts/controller.ts` — playback and favorites. Keep it free of `chrome.*` so tests can fake
+  the directory, player, and store.
+- `app/scripts/audio-engine.ts` — `HTMLAudioElement` plus a short ICY read. Reconnects: three tries,
+  2s / 4s / 8s. Do not count another Radio Browser click on retry.
+- `app/scripts/offscreen-player.ts` — Chromium path. Service workers have no DOM.
+- `app/scripts/popup.ts` — toolbar UI. Build DOM nodes; do not assign station text with `innerHTML`.
+- `app/scripts/background.ts` — wires Chrome APIs to the controller.
 
-### Chrome Extension Best Practices
+## Permissions
 
-- Follow Manifest V3 patterns with service workers
-- Use `chrome.action` API for extension badge and clicks
-- Handle Chrome extension lifecycle events properly
-- Implement proper error handling for Chrome API calls
+Keep them minimal. Required: `storage`, `offscreen` (Chromium manifest only),
+`declarativeNetRequest` for the Radio Browser User-Agent, and
+`https://*.api.radio-browser.info/*`. Song titles use optional host permissions and must keep
+working if the user declines. No analytics, no API keys, no Shoutcast developer key.
 
-### Code Organization
+## Checks
 
-- Keep functions small and focused (single responsibility)
-- Use descriptive variable and function names
-- Group related functionality into classes
-- Separate concerns (audio handling, UI updates, error handling)
-- Use dependency injection patterns where appropriate
-
-### Error Handling
-
-- Implement retry logic for network failures
-- Use proper error boundaries and graceful degradation
-- Log errors with context for debugging
-- Provide visual feedback for error states
-
-### Audio Management
-
-- Handle all audio events (loadstart, canplay, play, pause, error, ended)
-- Implement proper cleanup for audio resources
-- Use async/await for audio operations
-- Handle browser autoplay policies
-
-### State Management
-
-- Use explicit state objects with clear interfaces
-- Implement immutable state updates
-- Keep state changes predictable and traceable
-- Separate UI state from business logic
-
-### Testing Approach
-
-- Write unit tests for core functionality
-- Mock Chrome APIs using sinon-chrome
-- Test error conditions and edge cases
-- Maintain good test coverage
-
-### Code Quality
-
-- Follow ESLint rules and fix warnings
-- Use proper JSDoc comments for public methods
-- Keep code DRY (Don't Repeat Yourself)
-- Maintain consistent formatting
-
-## Architecture Patterns
-
-### MediaPlayer Class Structure
-
-```typescript
-class MediaPlayer {
-  readonly #audio = new Audio();
-  readonly #config: RadioConfig;
-  #state: PlaybackState;
-
-  constructor(config: RadioConfig) {}
-
-  // Event setup methods
-  #setupAudioEvents(): void {}
-  #setupChromeEvents(): void {}
-
-  // State management
-  #setState(updates: Partial<PlaybackState>): void {}
-
-  // UI updates
-  #updateBadge(): void {}
-  #updateTitle(): void {}
-
-  // Core functionality
-  #toggle(): void {}
-  #play(): Promise<void> {}
-  #stop(): void {}
-
-  // Error handling
-  #handlePlaybackError(): Promise<void> {}
-
-  // Public API
-  public getState(): Readonly<PlaybackState> {}
-  public isPlaying(): boolean {}
-}
+```bash
+npm test
+npm run lint
+npm run type-check
+npm run build
 ```
 
-### Configuration Interface
+Tests import TypeScript via `node --experimental-strip-types` and `test/register.mjs`. New playback
+or directory behavior belongs in those unit tests.
 
-```typescript
-interface RadioConfig {
-  readonly url: string;
-  readonly maxRetries: number;
-  readonly retryDelay: number;
-}
+## Style
 
-interface PlaybackState {
-  isPlaying: boolean;
-  isLoading: boolean;
-  hasError: boolean;
-  retryCount: number;
-}
-```
-
-## Build and Development
-
-### Scripts Usage
-
-- `npm run build:dev` - Development build with source maps
-- `npm run build:watch` - Watch mode for active development
-- `npm run build` - Production build
-- `npm run test` - Run test suite
-- `npm run lint` - Check code quality
-- `npm run type-check` - TypeScript validation
-
-### File Structure
-
-```
-app/
-├── manifest.json          # Extension manifest (Manifest V3)
-├── dist/                  # Built files (auto-generated)
-├── images/               # Extension icons
-├── scripts/
-│   └── background.ts     # Main service worker
-└── _locales/             # Internationalization
-test/                     # Test files
-```
-
-## Common Patterns
-
-### Chrome API Usage
-
-```typescript
-// Badge updates with proper typing
-chrome.action.setBadgeText({ text: 'ON' });
-chrome.action.setBadgeBackgroundColor({ color: '#00FF00' });
-chrome.action.setTitle({ title: 'S.I.R - Playing' });
-
-// Event listeners
-chrome.action.onClicked.addListener(() => this.#toggle());
-chrome.runtime.onInstalled.addListener(details => {});
-```
-
-### Audio Event Handling
-
-```typescript
-this.#audio.addEventListener('play', () => {
-  this.#setState({ isPlaying: true, retryCount: 0 });
-  this.#updateBadge();
-  this.#updateTitle();
-});
-```
-
-### Error Handling with Retry
-
-```typescript
-async #handlePlaybackError(): Promise<void> {
-  if (this.#state.retryCount >= this.#config.maxRetries) {
-    this.#setState({ hasError: true });
-    return;
-  }
-
-  this.#setState({ retryCount: this.#state.retryCount + 1 });
-  await new Promise(resolve => setTimeout(resolve, this.#config.retryDelay));
-
-  try {
-    await this.#play();
-  } catch (error) {
-    setTimeout(() => this.#handlePlaybackError(), this.#config.retryDelay);
-  }
-}
-```
-
-## Common Issues to Avoid
-
-1. **Don't use arrow functions for event handlers** when you need proper `this` binding
-2. **Don't mutate state directly** - always use `#setState()` method
-3. **Don't forget to handle audio cleanup** when stopping playback
-4. **Don't ignore Chrome extension lifecycle events**
-5. **Don't use console.log in production** - use proper logging with eslint directives
-
-## Extension-Specific Considerations
-
-- **Service Worker Limitations**: Remember that service workers have limitations on long-running
-  processes
-- **Audio Permissions**: Handle cases where audio autoplay is blocked
-- **Network Changes**: Implement proper reconnection logic for network interruptions
-- **Extension Updates**: Handle state migration during extension updates
-- **Memory Management**: Clean up event listeners and audio resources properly
-
-## Testing Guidelines
-
-- Mock Chrome APIs using sinon-chrome
-- Test both success and failure scenarios
-- Verify state changes and UI updates
-- Test retry logic and error handling
-- Use descriptive test names that explain the behavior being tested
-
-This project follows modern web development practices with a focus on reliability, maintainability,
-and user experience.
+Strict TypeScript, private fields, no `any`, braces on every control-flow body. Prettier is the
+formatter (`npm run format`). The license is MIT. Do not relicense to GPL-3.0; the ShoutKit apps are
+GPL and their reusable packages are MIT, and any change here is a decision to record, not to make
+silently.

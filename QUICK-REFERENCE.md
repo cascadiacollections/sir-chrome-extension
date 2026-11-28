@@ -1,4 +1,4 @@
-# S.I.R Chrome Extension - Quick Reference
+# ShoutKit extension — quick reference
 
 ## 🚀 Development Status: ✅ COMPLETE
 
@@ -39,7 +39,7 @@ npm run package       # Create extension.zip
 1. Open `chrome://extensions/`
 2. Enable "Developer mode"
 3. Click "Load unpacked" → Select `/app` folder
-4. Extension ready! Click the S.I.R icon to start/stop radio
+4. Open the ShoutKit popup, pick a station, and press play. The icon click opens the popup; it does not start audio by itself.
 
 ## 🐛 Debugging
 
@@ -51,16 +51,15 @@ npm run package       # Create extension.zip
 
 ### Chrome DevTools
 
-- Right-click S.I.R icon → "Inspect popup"
-- Or: `chrome://extensions/` → S.I.R → "Inspect views: background page"
+- Right-click the ShoutKit icon → Inspect popup
+- Or: `chrome://extensions/` → ShoutKit → service worker
 
-## 📦 Extension Features
+## Extension
 
-- **Stream Control**: Start/stop SModcast Internet Radio
-- **Visual Feedback**: Color-coded badge (🟢 Playing, 🔴 Stopped, 🟡 Loading)
-- **Auto-Retry**: Automatic reconnection on network failures
-- **Error Handling**: Graceful degradation with user feedback
-- **Performance**: Lightweight service worker architecture
+- Search Radio Browser and play a station from the toolbar popup
+- Badge: `OFF`, `...` (connecting), `ON`, `ERR`
+- Auto-retry: three reconnects at 2s, 4s, and 8s
+- Favorites in `chrome.storage.local`
 
 ## 🎯 VS Code Extensions
 
@@ -77,17 +76,11 @@ Essential extensions automatically recommended:
 ## 🔧 Architecture
 
 ```
-MediaPlayer Class (background.ts)
-├── Audio stream management
-├── Chrome badge updates
-├── Retry logic (3 attempts, 2s delay)
-├── State management
-└── Error handling
-
-Configuration
-├── Radio URL: smodcast.com/radio/stream/20
-├── Manifest V3 service worker
-└── Modern TypeScript interfaces
+controller.ts          playback, favorites, retries
+radio-browser.ts       mirror discovery and failover
+audio-engine.ts        HTMLAudioElement + ICY titles
+offscreen-player.ts    Chromium background audio
+popup.ts               toolbar UI
 ```
 
 ## 🚀 Next Steps
@@ -95,8 +88,8 @@ Configuration
 The extension is ready for:
 
 1. **Testing**: Load in Chrome and verify functionality
-2. **Distribution**: Package and share or submit to Chrome Web Store
-3. **Enhancement**: Add features like volume control, favorites, etc.
+2. **Playback**: confirm a station keeps playing after the popup closes
+3. **Favorites**: save a station and find it under Saved
 
 ## 🆘 Support
 

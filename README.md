@@ -1,38 +1,41 @@
-# S.I.R, Smodcast Internet Radio - Chrome Extension
+# ShoutKit
 
-Unofficial Chrome Extension for Kevin Smith's Smodcast Internet Radio, S.I.R.
+Browser extension for [ShoutKit](https://github.com/cascadiacollections/shoutkit), the free and
+open-source internet radio family. Search and play stations from
+[Radio Browser](https://www.radio-browser.info/), keep favorites in this browser, and leave the
+stream running after the toolbar popup closes.
 
-> **Quick Links**: [🚀 Quickstart](QUICKSTART.md) | [📖 Onboarding Guide](ONBOARDING.md) | [💻 Development Docs](DEVELOPMENT.md) | [🤝 Contributing](CONTRIBUTING.md)
+This repository used to be a one-station player for SModcast Internet Radio (S.I.R). That stream is
+gone; see [Why S.I.R is not built in](#why-sir-is-not-built-in). Nothing plays until you pick a
+station.
 
-[![CI/CD](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/cascadiacollections/sir-chrome-extension/badge)](https://scorecard.dev/viewer/?uri=github.com/cascadiacollections/sir-chrome-extension)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/d/gmmjhhjkjopgmnpidenddlplckefdbjd.svg)](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
-[![Node Version](https://img.shields.io/badge/node-%3E%3D24.0.0-brightgreen)](https://nodejs.org)
+> **Quick links**: [Quickstart](QUICKSTART.md) · [Development](DEVELOPMENT.md) ·
+> [Contributing](CONTRIBUTING.md)
+
+[![CI](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/cascadiacollections/sir-chrome-extension/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+ShoutKit on other platforms:
+[iOS and Apple TV](https://github.com/cascadiacollections/shoutkit) ·
+[Android](https://github.com/cascadiacollections/shoutkit-android)
 
 ## Features
 
-- 🎵 **One-click playback** - Click the extension icon to start/stop the radio stream
-- 🔄 **Auto-retry** - Automatically attempts to reconnect if the stream is interrupted
-- 📊 **Visual feedback** - Badge shows current status (OFF/ON/Loading/Error)
-- 🎨 **Color-coded badges** - Green for playing, gray for stopped, orange for loading, red for
-  errors
-- ⚡ **Lightweight** - Minimal resource usage with efficient background processing
-- 🔧 **Manifest V3** - Built with the latest Chrome extension standards
+- Search Radio Browser by name, or browse popular stations and a few genres
+- Play a station in the background (Chrome/Edge: an offscreen document; the popup can close)
+- Stop and start from the popup, or with the `Ctrl+Shift+9` / `Command+Shift+9` command
+- Save favorites with `chrome.storage.local` (this browser only)
+- Toolbar badge for idle, connecting, playing, and error (`OFF`, `...`, `ON`, `ERR`)
+- Reconnect if a stream drops: three tries, waiting 2s, then 4s, then 8s
+- Optional ICY song titles. Playback does not need that permission
+- No accounts, no analytics, no API keys
 
-## Installation
+HLS (`.m3u8`) stations are skipped. Chrome's audio element does not play them; the native ShoutKit
+apps use a platform player that does.
 
-### From Chrome Web Store
+## Install from source
 
-1. Visit the
-   [Chrome Web Store page](https://chrome.google.com/webstore/developer/edit/gmmjhhjkjopgmnpidenddlplckefdbjd)
-2. Click "Add to Chrome"
-
-### From Source
-
-See the [Onboarding Guide](ONBOARDING.md) for detailed setup instructions.
-
-Quick start:
+Chrome, Edge, and other Chromium browsers:
 
 ```bash
 git clone https://github.com/cascadiacollections/sir-chrome-extension.git
@@ -41,129 +44,114 @@ npm install
 npm run build
 ```
 
-Then load the `app` folder as an unpacked extension in Chrome.
+Load the `app` folder as an unpacked extension on `chrome://extensions` (Developer mode → Load
+unpacked). This package is not published to the Chrome Web Store from this branch.
+
+### Firefox
+
+Firefox has no offscreen-document API, and its background page can play audio directly. Before
+loading the extension, copy `app/manifest.firefox.json` over `app/manifest.json`. The Firefox
+manifest omits the Chromium-only `offscreen` permission and uses a background script instead of a
+service worker. Chrome and Edge should keep `app/manifest.json`.
+
+## Permissions
+
+| Permission                                        | Why                                                                                         |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `storage`                                         | Favorites and the last station, on this browser only                                       |
+| `offscreen`                                       | Chrome MV3 service workers cannot play audio. Required on Chromium, omitted for Firefox    |
+| `declarativeNetRequest`                           | Sets the User-Agent Radio Browser asks clients to send. Limited to `api.radio-browser.info` |
+| `https://*.api.radio-browser.info/*`              | Station search, mirror discovery, and play reports                                          |
+| optional `http://*/*` and `https://*/*`           | Only if you turn on song titles, so the extension can read ICY metadata from that station   |
+
+Song titles are off until you click **Enable song titles**. Chrome will describe that as access to
+the sites you play. The audio itself plays without it. Declining the prompt does not stop playback.
+
+## How station data is loaded
+
+Radio Browser has no single stable host and no API key. The extension follows the published client
+guidance as far as a browser can:
+
+1. Discover mirrors with `GET https://all.api.radio-browser.info/json/servers`. A browser extension
+   cannot do the documented DNS lookup, so this is the HTTP fallback. If discovery fails, a short
+   built-in list is used, and `all.api.radio-browser.info` stays last so a healthy mirror can still
+   be reached.
+2. Spread later requests across the mirrors and fail over (at most three tries, 350ms then 700ms).
+3. Send `User-Agent: ShoutKit-Extension/<version> (+https://github.com/cascadiacollections/sir-chrome-extension)`.
+4. When you press play on a Radio Browser station, call `/json/url/{stationuuid}` once. That counts
+   the play and returns a fresh stream URL. Automatic reconnects do not count another play.
+
+No Shoutcast directory key is used.
+
+## Why S.I.R is not built in
+
+Checked on 28 November 2026. The stream this extension used to play,
+`https://broadcast.shoutcheap.com/proxy/willradio/stream`, returned **HTTP 502 Bad Gateway**
+(`Server: cc-web/1.6.3`, HTML error page). The host itself answered on `/`; the station proxy did
+not. The playlist still linked from `https://www.smodcast.com/sir`
+(`https://cp12.shoutcheap.com:2199/tunein/willradio.pls`) presents a certificate for
+`radio.shoutcheap.com` only, and the account response is
+`Unable to access account for willradio: Invalid username or password`. Radio Browser has no
+station named SModcast.
+
+A preset that only errors is not useful, so S.I.R is not selectable and is not the default. The
+probe details are in the changelog. If the station comes back, it can be added as a curated station
+or listed in Radio Browser.
 
 ## Development
 
-New contributors should start with the [Onboarding Guide](ONBOARDING.md).
-
-### Prerequisites
-
-- Node.js >= 24.0.0
-- npm >= 10.0.0
-
-### Quick Start
+Node.js >= 24 and npm >= 10.
 
 ```bash
-# Install dependencies
 npm install
-
-# Build for development
-npm run build:dev
-
-# Build for production
-npm run build
-
-# Watch for changes during development
-npm run build:watch
-
-# Run tests
-npm run test
-
-# Lint code
+npm test
 npm run lint
+npm run type-check
+npm run build
+npm run build:watch
 ```
-
-### Dev Container (Recommended)
-
-This project includes a dev container configuration for consistent development environments:
-
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop)
-2. Install the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code
-3. Open the project in VS Code
-4. Click "Reopen in Container" when prompted
-
-The dev container includes all dependencies and tools pre-configured!
-
-For detailed development information, see [DEVELOPMENT.md](DEVELOPMENT.md).
-
-### Project Structure
 
 ```
 app/
-├── manifest.json          # Extension manifest
-├── dist/                  # Built files (generated)
-├── images/               # Extension icons
-├── scripts/
-│   └── background.ts     # Main background script
-└── _locales/
-    └── en/
-        └── messages.json # Internationalization
-
-test/                     # Test files
-webpack.config.js        # Build configuration
-tsconfig.json           # TypeScript configuration
+├── manifest.json              # Chromium (Chrome, Edge)
+├── manifest.firefox.json      # Firefox background-page manifest
+├── popup.html                 # Toolbar UI
+├── offscreen.html             # Chromium audio document
+├── rules.json                 # User-Agent for Radio Browser only
+├── scripts/                   # TypeScript source
+└── dist/                      # Webpack output (generated)
 ```
 
-### Scripts
+Tests cover station mapping, Radio Browser failover, favorites, ICY titles, and the reconnect
+policy. They do not open a browser.
 
-- `npm run build` - Build for production
-- `npm run build:dev` - Build for development with source maps
-- `npm run build:watch` - Watch mode for development
-- `npm run test` - Run test suite
-- `npm run lint` - Lint TypeScript files
-- `npm run type-check` - Type check without emitting files
-- `npm run package` - Build and create extension package
-- `npm run clean` - Clean build artifacts
+## Privacy
 
-## Technical Details
+ShoutKit does not add analytics, accounts, or tracking. Traffic you cause by using it:
 
-### Architecture
+- Directory queries to Radio Browser (search text, genre, station id)
+- One play report per play, the station's public id only
+- The audio stream, requested from the station you chose
+- A short extra request to that same station for the ICY title, only while a station is playing and
+  only if the request is allowed (song-title permission, or a station that already sends CORS)
 
-- **Background Script**: Manages audio playback and Chrome extension APIs
-- **Service Worker**: Runs in the background to handle user interactions
-- **Audio Streaming**: Direct connection to S.I.R's streaming server
-
-### Error Handling
-
-- Automatic retry logic with exponential backoff
-- Visual error indicators in the extension badge
-- Comprehensive logging for debugging
-
-### Browser Compatibility
-
-- Chrome (Manifest V3)
-- Chromium-based browsers (Edge, Brave, etc.)
-
-## Contributing
-
-We welcome contributions! Please see our [Onboarding Guide](ONBOARDING.md) for getting started and [Contributing Guidelines](CONTRIBUTING.md) for the full process.
-
-Quick steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Code Style
-
-- TypeScript with strict type checking
-- ESLint for code quality
-- Prettier-compatible formatting
-- Private class fields for encapsulation
+Favorites stay in `chrome.storage.local`.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT. See [LICENSE](LICENSE).
 
-## Disclaimer
+The ShoutKit iOS and Android **apps** are GPL-3.0. Their reusable packages are MIT. This extension
+does not copy those app targets; it is new browser code written against the public Radio Browser
+and ICY formats. It stays MIT. Whether it should instead use GPL-3.0, so distributed forks stay
+open the way the apps do, is an open decision and is not made silently here.
 
-This is an unofficial Chrome extension for S.I.R (Smodcast Internet Radio). It is not affiliated
-with or endorsed by Kevin Smith, SModcast, or any related entities.
+The ShoutKit name and the toolbar icon (resized from the iOS repo's `site/assets/app-icon-256.png`)
+are the family's branding. The iOS repo's `TRADEMARK.md` says that branding is not part of the code
+license.
 
-## Support
+## Repository name
 
-If you encounter any issues or have suggestions, please
-[open an issue](https://github.com/cascadiacollections/sir-chrome-extension/issues) on GitHub.
+The GitHub repository is still `cascadiacollections/sir-chrome-extension`. Renaming it, and updating
+[KevinTCoughlin/sir-extension-www](https://github.com/KevinTCoughlin/sir-extension-www) which links
+here, are follow-ups. This tree does not publish a release or a Web Store listing.

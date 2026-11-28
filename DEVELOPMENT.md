@@ -1,4 +1,4 @@
-# S.I.R Chrome Extension - Development Guide
+# ShoutKit extension — development guide
 
 ## Quick Start
 
@@ -50,8 +50,8 @@ npm run build:watch
 
 #### Manual Debugging
 
-1. Right-click the S.I.R extension icon → "Inspect popup"
-2. Or navigate to `chrome://extensions/` → S.I.R → "Inspect views: background page"
+1. Right-click the ShoutKit icon → Inspect popup
+2. Or open `chrome://extensions/` → ShoutKit → service worker (Chromium) or background page
 3. Use Chrome DevTools to debug
 
 ### 4. Testing
@@ -86,34 +86,33 @@ npm run test:watch
 
 ```
 app/
-├── manifest.json          # Extension manifest (V3)
-├── scripts/
-│   └── background.ts      # Service worker (main logic)
-├── images/               # Extension icons
-└── _locales/            # Internationalization
+├── manifest.json           # Chromium manifest
+├── manifest.firefox.json   # Firefox manifest
+├── popup.html              # Toolbar UI
+├── offscreen.html          # Chromium audio document
+├── rules.json              # Radio Browser User-Agent rule
+├── scripts/                # TypeScript
+└── images/                 # Toolbar icons
 ```
 
-### Key Components
+### Key components
 
-#### MediaPlayer Class
+- `radio-browser.ts` discovers Radio Browser mirrors and fails over. It does not hard-code one API host.
+- `controller.ts` is the playback and favorites state machine. Tests drive it with fakes.
+- `audio-engine.ts` plays with `HTMLAudioElement` and reads one ICY metadata frame at a time.
+- On Chromium, `offscreen-player.ts` owns that audio element inside an offscreen document because a
+  service worker has no DOM. On Firefox, `background.ts` uses `audio-engine.ts` directly when
+  `Audio` exists.
+- Reconnects: three tries after the first failure, at 2s, 4s, and 8s. Directory failover is separate
+  (three tries, 350ms doubled).
 
-- Manages audio playback state
-- Handles Chrome extension badge updates
-- Implements retry logic for network failures
-- Provides visual feedback through colored badges
+### Chrome extension APIs
 
-#### Configuration
-
-- Radio stream URL: `http://www.smodcast.com/radio/stream/20`
-- Auto-retry on failure with exponential backoff
-- Maximum 3 retry attempts
-- 2-second retry delay
-
-### Chrome Extension APIs Used
-
-- `chrome.action` - Badge text, color, and title updates
-- `chrome.runtime` - Extension lifecycle events
-- Audio Web API - Stream playback
+- `chrome.action` — badge, title, popup
+- `chrome.offscreen` — background audio on Chromium
+- `chrome.storage.local` — favorites and last station
+- `chrome.declarativeNetRequest` — User-Agent on `api.radio-browser.info` only
+- `chrome.commands` — play/stop shortcut
 
 ## Development Tips
 

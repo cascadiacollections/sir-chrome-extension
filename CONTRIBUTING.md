@@ -1,6 +1,6 @@
-# Contributing to S.I.R Chrome Extension
+# Contributing to the ShoutKit extension
 
-Thank you for your interest in contributing to the S.I.R Chrome Extension! This document provides
+Thank you for contributing to the ShoutKit browser extension. This document provides
 guidelines and information for contributors.
 
 ## Development Setup
@@ -206,4 +206,4 @@ If you have questions about contributing:
 - Help others learn and contribute
 - Follow the project's coding standards
 
-Thank you for contributing to the S.I.R Chrome Extension!
+Thank you for contributing to the ShoutKit extension!

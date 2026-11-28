@@ -1,4 +1,7 @@
-# S.I.R Chrome Extension - Improvement Summary
+# S.I.R Chrome Extension — improvement summary
+
+> Historical notes from the 1.x single-station extension. The product is now the ShoutKit browser
+> extension. See the changelog and README.
 
 ## Overview
 

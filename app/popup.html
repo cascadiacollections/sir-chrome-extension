@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShoutKit</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <img src="images/icon-38.png" width="38" height="38" alt="" />
+      <div>
+        <h1>ShoutKit</h1>
+        <p>Internet radio</p>
+      </div>
+    </header>
+
+    <section class="now" aria-live="polite">
+      <div class="now-copy">
+        <p id="station-name">Nothing playing</p>
+        <p id="track-name">Pick a station</p>
+      </div>
+      <div class="now-actions">
+        <button id="favorite" type="button" aria-pressed="false" hidden>
+          Favorite
+        </button>
+        <button id="transport" type="button">Play</button>
+      </div>
+    </section>
+
+    <div class="tools">
+      <form id="search-form" role="search">
+        <label class="sr-only" for="search">Search stations</label>
+        <input
+          id="search"
+          type="search"
+          placeholder="Search stations"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="80"
+        />
+      </form>
+      <div class="chips" role="toolbar" aria-label="Browse">
+        <button type="button" data-chip="popular" aria-pressed="true">
+          Popular
+        </button>
+        <button type="button" data-chip="saved" aria-pressed="false">
+          Saved
+        </button>
+        <button type="button" data-chip="rock" aria-pressed="false">
+          Rock
+        </button>
+        <button type="button" data-chip="jazz" aria-pressed="false">
+          Jazz
+        </button>
+        <button type="button" data-chip="news" aria-pressed="false">
+          News
+        </button>
+        <button type="button" data-chip="classical" aria-pressed="false">
+          Classical
+        </button>
+        <button type="button" data-chip="electronic" aria-pressed="false">
+          Electronic
+        </button>
+      </div>
+    </div>
+
+    <p id="banner" class="banner" hidden></p>
+    <div id="list" class="list" role="list"></div>
+
+    <footer>
+      <p>Station data from Radio Browser. No accounts, no tracking.</p>
+      <button
+        id="metadata"
+        type="button"
+        title="Reads the public stream title from the station you are playing. Optional. Playback works without it."
+      >
+        Enable song titles (optional)
+      </button>
+    </footer>
+    <script src="dist/popup.js"></script>
+  </body>
+</html>

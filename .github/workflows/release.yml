@@ -38,8 +38,8 @@ jobs:
       - name: Create extension package
         run: |
           cd app
-          zip -r ../sir-chrome-extension-${GITHUB_REF#refs/tags/}.zip . \
-            -x "*.ts" "*.map" "scripts/*.ts"
+          zip -r ../shoutkit-${GITHUB_REF#refs/tags/}.zip . \
+            -x "*.ts" "*.map" "scripts/*.ts" "manifest.firefox.json"
           cd ..
 
       - name: Generate changelog
@@ -67,7 +67,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          files: sir-chrome-extension-*.zip
+          files: shoutkit-*.zip
           body: |
             ## Changes in this Release
             
@@ -75,7 +75,7 @@ jobs:
             
             ## Installation
             
-            1. Download the `sir-chrome-extension-*.zip` file below
+            1. Download the `shoutkit-*.zip` file below
             2. Unzip the file
             3. Open Chrome and go to `chrome://extensions/`
             4. Enable "Developer mode"
@@ -90,5 +90,5 @@ jobs:
       - name: Upload to Chrome Web Store
         if: ${{ !contains(github.ref, 'alpha') && !contains(github.ref, 'beta') && !contains(github.ref, 'rc') }}
         run: |
-          echo "::notice::Manual step required: Upload sir-chrome-extension-${GITHUB_REF#refs/tags/}.zip to Chrome Web Store"
+          echo "::notice::Manual step required: Upload shoutkit-${GITHUB_REF#refs/tags/}.zip to Chrome Web Store"
           echo "Visit: https://chrome.google.com/webstore/devconsole"
