@@ -33,6 +33,12 @@ import { APP_VERSION, USER_AGENT } from '../app/scripts/version.ts';
 
 const root = new URL('..', import.meta.url);
 
+/** Host and path from a request URL. Prefix checks on the whole URL also match a longer host. */
+function requestTarget(value) {
+  const url = new URL(String(value));
+  return { hostname: url.hostname, pathname: url.pathname };
+}
+
 function readJson(path) {
   return JSON.parse(readFileSync(new URL(path, root), 'utf8'));
 }
@@ -379,8 +385,14 @@ describe('ShoutKit extension', function () {
     it('discovers mirrors, fails over, and sends the ShoutKit user agent', async function () {
       const calls = [];
       const fetchImpl = async (url, init) => {
-        calls.push({ url: String(url), agent: init.headers['User-Agent'] });
-        if (String(url).endsWith('/json/servers')) {
+        const target = requestTarget(url);
+        calls.push({
+          url: String(url),
+          hostname: target.hostname,
+          pathname: target.pathname,
+          agent: init.headers['User-Agent'],
+        });
+        if (target.pathname === '/json/servers') {
           return new Response(
             JSON.stringify([
               { name: 'de1.api.radio-browser.info' },
@@ -389,7 +401,7 @@ describe('ShoutKit extension', function () {
             { status: 200 }
           );
         }
-        if (String(url).startsWith('https://de2.api.radio-browser.info')) {
+        if (target.hostname === 'de2.api.radio-browser.info') {
           return new Response('', { status: 503 });
         }
         return new Response(
@@ -419,24 +431,21 @@ describe('ShoutKit extension', function () {
       expect(found).to.have.length(1);
       expect(found[0].name).to.equal('Example FM');
       expect(calls.every(call => call.agent === USER_AGENT)).to.equal(true);
-      expect(calls.some(call => call.url.includes('/json/servers'))).to.equal(
+      expect(calls.some(call => call.pathname === '/json/servers')).to.equal(
         true
       );
       expect(
-        calls.some(call =>
-          call.url.startsWith('https://de2.api.radio-browser.info')
-        )
+        calls.some(call => call.hostname === 'de2.api.radio-browser.info')
       ).to.equal(true);
       expect(
-        calls.some(call =>
-          call.url.startsWith('https://de1.api.radio-browser.info')
-        )
+        calls.some(call => call.hostname === 'de1.api.radio-browser.info')
       ).to.equal(true);
     });
 
     it('reports one click and falls back to the known stream if reporting fails', async function () {
       const fetchImpl = async url => {
-        if (String(url).endsWith('/json/servers')) {
+        const target = requestTarget(url);
+        if (target.pathname === '/json/servers') {
           return new Response(
             JSON.stringify([{ name: 'de1.api.radio-browser.info' }]),
             {
@@ -444,7 +453,7 @@ describe('ShoutKit extension', function () {
             }
           );
         }
-        if (String(url).includes('/json/url/')) {
+        if (target.pathname.startsWith('/json/url/')) {
           return new Response(
             JSON.stringify({ ok: true, url: 'https://cdn.example/fresh.mp3' }),
             {
